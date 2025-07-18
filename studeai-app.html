@@ -1,0 +1,2611 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stude Aí</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #121212;
+      --card-color: #1e1e1e;
+      --text-color: #e0e0e0;
+      --accent-color: #2196f3;
+      --hover-color: #1976d2;
+      --border-color: #333;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --danger-color: #f44336;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      padding: 0;
+      margin: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: var(--card-color);
+      color: white;
+      padding: 20px 0;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+    }
+
+    .card {
+      background: var(--card-color);
+      padding: 25px;
+      border-radius: var(--radius);
+      margin-bottom: 25px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      background: #2a2a2a;
+      color: var(--text-color);
+      font-size: 16px;
+      transition: var(--transition);
+      box-sizing: border-box;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.3);
+    }
+
+    button {
+      padding: 12px 24px;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 16px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background: var(--hover-color);
+      transform: translateY(-2px);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+    }
+
+    button.secondary:hover {
+      background: rgba(33, 150, 243, 0.1);
+    }
+
+    .btn-icon {
+      padding: 10px;
+      border-radius: 50%;
+      min-width: 40px;
+      height: 40px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: var(--card-color);
+      padding: 10px 20px; /* altura menor */
+      margin-bottom: 8px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+      font-size: 15px; /* menor */
+      min-height: unset;
+      line-height: 1.3;
+    }
+    li:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+    .accordion-content ul li {
+      padding: 6px 0 6px 0;
+      margin-bottom: 2px;
+      font-size: 15px;
+      min-height: unset;
+      line-height: 1.3;
+    }
+
+    .review-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .review-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .review-discipline {
+      font-weight: 600;
+      color: var(--accent-color);
+      font-size: 18px;
+    }
+
+    .review-content {
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .review-notes {
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .review-notes i {
+      margin-right: 5px;
+      color: var(--accent-color);
+    }
+
+    .actions {
+      position: static;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .actions button {
+      background: transparent;
+      border: none;
+      color: #777;
+      cursor: pointer;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .actions button:hover {
+      color: var(--danger-color);
+      transform: none;
+      background: transparent;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--accent-color);
+      color: white;
+    }
+
+    .badge.danger {
+      background: var(--danger-color);
+    }
+
+    .badge.warning {
+      background: var(--warning-color);
+      color: #333;
+    }
+
+    .badge.success {
+      background: var(--success-color);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--card-color);
+      padding: 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin: 10px 0;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #777;
+    }
+
+    .empty-state i {
+      font-size: 50px;
+      color: var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      transition: var(--transition);
+      color: #aaa;
+    }
+
+    .tab.active {
+      border-bottom-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .tab:hover:not(.active) {
+      color: var(--text-color);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .progress-container {
+      width: 100%;
+      background: #2a2a2a;
+      border-radius: 20px;
+      margin: 15px 0;
+      height: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 20px;
+      background: var(--accent-color);
+      transition: width 0.5s ease;
+    }
+
+    /* NOVO DESIGN DOS CARDS DE REVISÃO */
+    .card-review {
+      background: var(--card-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px 12px 10px 12px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      min-width: 220px;
+      max-width: 300px;
+      width: 100%;
+    }
+    .card-review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .badge-disciplina {
+      background: #b388ff;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 14px;
+      border-radius: 16px;
+      margin-right: 8px;
+      display: inline-block;
+    }
+    .card-review-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0 0 2px 0;
+      color: var(--text-color);
+    }
+    .card-review-obs {
+      color: #bdbdbd;
+      font-style: italic;
+      font-size: 0.98em;
+      margin-bottom: 2px;
+    }
+    .card-review-info {
+      color: #bdbdbd;
+      font-size: 0.97em;
+      margin-bottom: 2px;
+    }
+    .card-review-progress {
+      width: 100%;
+      height: 6px;
+      background: #23243a;
+      border-radius: 8px;
+      margin-top: 8px;
+      margin-bottom: 0;
+      overflow: hidden;
+    }
+    .card-review-progress-bar {
+      height: 100%;
+      background: var(--accent-color);
+      border-radius: 8px;
+      transition: width 0.4s;
+    }
+    .card-review-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .card-review-actions button {
+      background: none;
+      border: none;
+      color: #bdbdbd;
+      font-size: 1.1em;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .card-review-actions button:hover {
+      background: #23243a;
+      color: var(--danger-color);
+    }
+    .card-review-revisao {
+      color: #bdbdbd;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .card-review-revisao i {
+      font-size: 1em;
+    }
+
+    /* Grid para os cards de revisão de hoje */
+    #revisoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+
+    @media (max-width: 700px) {
+      #revisoes {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .card-review {
+        max-width: 100%;
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .card {
+        padding: 15px;
+      }
+      
+      button {
+        padding: 10px 15px;
+      }
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+    .nav-link {
+      color: #bdbdbd;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08em;
+      padding: 6px 16px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-link-active, .nav-link:hover {
+      background: var(--accent-color);
+      color: #fff;
+    }
+    .tabela-cronograma {
+      background: var(--card-color);
+      border-radius: 12px;
+      padding: 18px 12px 12px 12px;
+      margin-bottom: 28px;
+      border: 1px solid var(--border-color);
+    }
+    .tabela-estudo {
+      width: 100%;
+      border-collapse: collapse;
+      color: #e0e0e0;
+    }
+    .tabela-estudo th, .tabela-estudo td {
+      text-align: left;
+      padding: 10px 8px;
+    }
+    .tabela-estudo thead tr {
+      background: #181a23;
+    }
+    .tabela-estudo tbody tr {
+      border-bottom: 1px solid var(--border-color);
+    }
+    .tabela-estudo tbody tr:last-child {
+      border-bottom: none;
+    }
+    .periodo-card {
+      flex: 1;
+      min-width: 220px;
+      background: #181a23;
+      border-radius: 10px;
+      padding: 18px 16px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 10px;
+    }
+    .periodo-titulo {
+      color: var(--accent-color);
+      font-size: 1.2em;
+      font-weight: 700;
+    }
+    .periodo-card p {
+      margin: 8px 0 0 0;
+      color: #bdbdbd;
+    }
+    .edital-card {
+      background: var(--card-color);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 18px;
+      padding: 16px 18px 12px 18px;
+    }
+    .edital-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1em;
+      margin-bottom: 6px;
+    }
+    .edital-bar {
+      width: 100%;
+      height: 14px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .edital-bar-inner {
+      height: 100%;
+      background: var(--accent-color);
+      border-radius: 8px;
+      transition: width 0.4s;
+    }
+    .edital-area {
+      background: #1E1E1E;
+      border-radius: 10px;
+      border: 1px solid #1e1e1e;
+      margin-bottom: 28px;
+      padding: 18px 18px 12px 18px;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18);
+    }
+    .edital-area-header {
+      font-size: 1.25em;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      letter-spacing: 0.01em;
+    }
+    .accordion-header {
+      background: #181818;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding: 18px 22px 18px 22px;
+      font-size: 1.08em;
+      font-weight: 600;
+      color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      border: 1px solid #232323;
+      box-shadow: 0 1px 6px 0 rgba(0,0,0,0.10);
+      text-align: left;
+    }
+    .accordion-header span {
+      flex: 1;
+      text-align: left;
+      margin-left: 0;
+      display: block;
+    }
+    .accordion-header i {
+      margin-left: 0;
+      margin-right: 0;
+      font-size: 1.1em;
+      color: #bdbdbd;
+      transition: transform 0.2s;
+      text-align: right;
+      align-self: center;
+      justify-self: flex-end;
+    }
+    .accordion-content {
+      background: #232323;
+      border-radius: 0 0 8px 8px;
+      margin-bottom: 18px;
+      margin-top: -8px;
+      padding: 0 22px 18px 22px;
+      border: 1px solid #232323;
+      border-top: none;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+      display: none;
+      transition: all 0.3s;
+      text-align: left;
+    }
+    .accordion-content.open {
+      display: block;
+      animation: fadeInAccordion 0.3s;
+    }
+    @keyframes fadeInAccordion {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Ajustes para a barra de progresso do módulo */
+    .edital-bar {
+      width: 250px; /* Largura aumentada */
+      height: 8px;
+      background: #23243a;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 0; /* Removido margin-top aqui para controle via flexbox */
+      margin-bottom: 0;
+      border: 1px solid hsl(237, 25%, 18%);
+      display: inline-block; /* Re-adicionado para manter o layout inline */
+      vertical-align: middle; /* Re-adicionado para alinhamento vertical */
+    }
+    .edital-bar-inner {
+      height: 100%;
+      background: var(--accent-color);
+      border-radius: 8px;
+      transition: width 0.4s;
+    }
+    .accordion-content > .edital-bar,
+    .accordion-content > span {
+      /* Estas regras são para elementos irmãos dentro do accordion-content */
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px; /* Espaçamento entre a barra e o percentual */
+    }
+    .accordion-content > span {
+      color: #bdbdbd;
+      font-size: 0.98em;
+      font-weight: 500;
+    }
+    /* Espaçamento entre cards de disciplina */
+    .accordion-discipline {
+      margin-bottom: 10px;
+    }
+    .aula-item {
+      padding: 4px 0;
+      margin: 0;
+      font-size: 0.98em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <h1 style="color: var(--accent-color);"><i class="fas fa-brain" style="color: var(--accent-color);"></i> Stude Aí</h1>
+      <nav class="main-nav">
+        <a href="#" id="linkRevisao" class="nav-link nav-link-active">Revisão</a>
+        <a href="#" id="linkCronograma" class="nav-link">Cronograma</a>
+        <a href="#" id="linkEdital" class="nav-link">Edital</a>
+        <a href="#" id="linkBackup" class="nav-link">Backup</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" id="mainContainer">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Conteúdos Estudados</div>
+        <div class="stat-value" id="totalStudies">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Revisões Hoje</div>
+        <div class="stat-value" id="todayReviews">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Próximas Revisões</div>
+        <div class="stat-value" id="upcomingReviews">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Revisões Atrasadas</div>
+        <div class="stat-value" id="overdueReviews">0</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2><i class="fas fa-plus-circle"></i> Adicionar Estudo</h2>
+        <form id="formulario">
+          <label for="disciplina">Disciplina:</label>
+          <select id="disciplina" required>
+            <option value="" disabled selected>Selecione uma disciplina</option>
+            <option>Português</option>
+            <option>Biologia</option>
+            <option>Química</option>
+            <option>Física</option>
+            <option>História</option>
+            <option>Geografia</option>
+            <option>Matemática</option>
+            <option>Filosofia</option>
+            <option>Sociologia</option>
+            <option>Redação</option>
+            <option>Inglês</option>
+          </select>
+
+          <label for="conteudo">Conteúdo:</label>
+          <input type="text" id="conteudo" required placeholder="Ex: Ligações Químicas">
+
+          <label for="dataEstudo">Data do Estudo:</label>
+          <input type="date" id="dataEstudo" max="9999-12-31" placeholder="Selecione a data">
+
+          <label for="observacao">Observação (opcional):</label>
+          <textarea id="observacao" rows="3" placeholder="Ex: Usar resumo X, focar em tópico Y"></textarea>
+
+          <button type="submit"><i class="fas fa-save"></i> Salvar Estudo</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2><i class="fas fa-calendar-check"></i> Progresso</h2>
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+        <p id="progressText">Você ainda não iniciou seus estudos.</p>
+        
+        <h3 style="margin-top: 30px;">Próximas Revisões</h3>
+        <ul id="upcomingList">
+          <li class="empty-state">
+            <i class="fas fa-calendar-plus"></i>
+            <p>Nenhuma revisão agendada</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="today">Revisões de Hoje</div>
+      <div class="tab" data-tab="all">Conteúdos Estudados</div>
+    </div>
+
+    <div class="tab-content active" id="today-tab">
+      <ul id="revisoes">
+        <li class="empty-state">
+          <i class="fas fa-check-circle"></i>
+          <p>Nenhuma revisão agendada para hoje</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="all-tab">
+      <ul id="allStudies">
+        <li class="empty-state">
+          <i class="fas fa-book"></i>
+          <p>Você ainda não adicionou nenhum estudo</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  <div class="container" id="cronogramaContainer" style="display:none;">
+    <h2 style="margin-top: 0;">Cronograma Semanal de Estudos</h2>
+    <p>Este é o seu plano de estudos para a semana.</p>
+    <div class="tabela-cronograma">
+      <table class="tabela-estudo">
+        <thead>
+          <tr>
+            <th>Dia</th>
+            <th>Manhã (6h às 8h)</th>
+            <th>Horário Livre</th>
+            <th>Noite (19h às 21h)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Segunda</td><td>Português</td><td>Português, Física</td><td>Biologia</td></tr>
+          <tr><td>Terça</td><td>Química</td><td>Filosofia</td><td>Redação</td></tr>
+          <tr><td>Quarta</td><td>Física</td><td>Matemática</td><td>Biologia</td></tr>
+          <tr><td>Quinta</td><td>Português</td><td>Sociologia</td><td>Redação</td></tr>
+          <tr><td>Sexta</td><td>Biologia</td><td>História</td><td>Matemática</td></tr>
+          <tr><td>Sábado</td><td>Simulado</td><td>Química</td><td>Geografia</td></tr>
+          <tr><td>Domingo</td><td>Revisão</td><td>Redação e Inglês</td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+      <div class="periodo-card">
+        <span class="periodo-titulo"><i class="fas fa-meteor"></i> Manhã (6h às 8h30)</span>
+        <p>O período de estudo matinal está programado para garantir pelo menos 2 horas de estudo.</p>
+      </div>
+      <div class="periodo-card">
+        <span class="periodo-titulo"><i class="fas fa-sun"></i> Horário Livre</span>
+        <p>Período reservado para estudo nos intervalos das atividades e compromissos diários.</p>
+      </div>
+      <div class="periodo-card">
+        <span class="periodo-titulo"><i class="fas fa-moon"></i> Noite (19h às 21h)</span>
+        <p>O período de estudo noturno está programado para garantir pelo menos 2 horas de estudo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="editalContainer" style="display:none;">
+    <h2 style="margin-top: 0;">Edital e Conteúdo Programático</h2>
+    <p>Acompanhe seu progresso de estudos marcando os tópicos concluídos.</p>
+    <div class="edital-card">
+      <div class="edital-card-header">
+        <strong>Progresso Geral do Edital</strong>
+        <span id="editalProgressoGeral">0%</span>
+      </div>
+      <div class="edital-bar">
+        <div class="edital-bar-inner" id="editalBarGeral" style="width:0%"></div>
+      </div>
+    </div>
+    <div id="editalAreas">
+      <!-- Áreas e disciplinas serão renderizadas aqui via JS -->
+    </div>
+  </div>
+
+  <div class="container" id="backupContainer" style="display:none;">
+    <h2 style="margin-top: 0;">Backup e Restauração</h2>
+    <p>Faça backup dos seus dados de estudos e restaure quando quiser.</p>
+    <button id="btnExportBackup"><i class="fas fa-download"></i> Fazer Backup</button>
+    <input type="file" id="inputImportBackup" accept="application/json" style="display:none;" />
+    <button id="btnImportBackup"><i class="fas fa-upload"></i> Importar Backup</button>
+    <div id="importStatus" style="margin-top:12px;color:#bdbdbd;"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("formulario");
+      const revisoesUl = document.getElementById("revisoes");
+      const allStudiesUl = document.getElementById("allStudies");
+      const upcomingList = document.getElementById("upcomingList");
+      const tabs = document.querySelectorAll(".tab");
+      const tabContents = document.querySelectorAll(".tab-content");
+      const totalStudiesEl = document.getElementById("totalStudies");
+      const todayReviewsEl = document.getElementById("todayReviews");
+      const upcomingReviewsEl = document.getElementById("upcomingReviews");
+      const overdueReviewsEl = document.getElementById("overdueReviews");
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+
+      // Tab functionality
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(t => t.classList.remove("active"));
+          tabContents.forEach(c => c.classList.remove("active"));
+          
+          tab.classList.add("active");
+          document.getElementById(`${tab.dataset.tab}-tab`).classList.add("active");
+        });
+      });
+
+      // Alternância entre Revisão, Cronograma e Edital
+      const linkRevisao = document.getElementById('linkRevisao');
+      const linkCronograma = document.getElementById('linkCronograma');
+      const linkEdital = document.getElementById('linkEdital');
+      const linkBackup = document.getElementById('linkBackup');
+      const mainContainer = document.getElementById('mainContainer');
+      const cronogramaContainer = document.getElementById('cronogramaContainer');
+      const editalContainer = document.getElementById('editalContainer');
+      const backupContainer = document.getElementById('backupContainer');
+
+      linkRevisao.addEventListener('click', (e) => {
+        e.preventDefault();
+        linkRevisao.classList.add('nav-link-active');
+        linkCronograma.classList.remove('nav-link-active');
+        linkEdital.classList.remove('nav-link-active');
+        linkBackup.classList.remove('nav-link-active');
+        mainContainer.style.display = '';
+        cronogramaContainer.style.display = 'none';
+        editalContainer.style.display = 'none';
+        backupContainer.style.display = 'none';
+      });
+
+      linkCronograma.addEventListener('click', (e) => {
+        e.preventDefault();
+        linkCronograma.classList.add('nav-link-active');
+        linkRevisao.classList.remove('nav-link-active');
+        linkEdital.classList.remove('nav-link-active');
+        linkBackup.classList.remove('nav-link-active');
+        mainContainer.style.display = 'none';
+        cronogramaContainer.style.display = '';
+        editalContainer.style.display = 'none';
+        backupContainer.style.display = 'none';
+      });
+
+      linkEdital.addEventListener('click', (e) => {
+        e.preventDefault();
+        linkEdital.classList.add('nav-link-active');
+        linkRevisao.classList.remove('nav-link-active');
+        linkCronograma.classList.remove('nav-link-active');
+        linkBackup.classList.remove('nav-link-active');
+        mainContainer.style.display = 'none';
+        cronogramaContainer.style.display = 'none';
+        editalContainer.style.display = '';
+        backupContainer.style.display = 'none';
+      });
+
+      linkBackup.addEventListener('click', (e) => {
+        e.preventDefault();
+        linkBackup.classList.add('nav-link-active');
+        linkRevisao.classList.remove('nav-link-active');
+        linkCronograma.classList.remove('nav-link-active');
+        linkEdital.classList.remove('nav-link-active');
+        mainContainer.style.display = 'none';
+        cronogramaContainer.style.display = 'none';
+        editalContainer.style.display = 'none';
+        backupContainer.style.display = '';
+      });
+
+      // --- ESTRUTURA DO EDITAL (reorganizada conforme solicitado) ---
+      const editalData = [
+        {
+          nome: 'Ciências da Natureza e suas Tecnologias',
+          disciplinas: [
+            // QUÍMICA
+            {
+              nome: 'Química',
+              modulos: [
+                {
+                  nome: 'MÓDULO DE INTRODUÇÃO À QUÍMICA E CÁLCULOS',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução à Química e Cálculos', importancia: 1 },
+                    { nome: 'Aula 02 - Método de separação das misturas', importancia: 3 },
+                    { nome: 'Aula 03 - Hidrogênio Verde', importancia: 4 },
+                    { nome: 'Aula 04 - Estação de Tratamento de Água', importancia: 5 },
+                    { nome: 'Aula 05 - Grandezas Químicas', importancia: 2 },
+                    { nome: 'Aula 06 - Estequiometria - Parte 1', importancia: 5 },
+                    { nome: 'Aula 07 - Estequiometria - Parte 2', importancia: 5 },
+                    { nome: 'Aula 08 - Balanceamento de Equações', importancia: 1 },
+                    { nome: 'Aula 09 - Teoria Moderna de Ácidos e Bases', importancia: 1 },
+                    { nome: 'Aula 10 - Gases', importancia: 2 },
+                    { nome: 'Aula 11 - Densidade Absoluta', importancia: 1 },
+                    { nome: 'Aula 12 - Modelos Atômicos', importancia: 2 },
+                    { nome: 'Aula 13 - Alotropia', importancia: 1 },
+                    { nome: 'Aula 14 - Representação de um Nuclídeo', importancia: 1 },
+                    { nome: 'Aula 15 - Distribuição Eletrônica', importancia: 1 },
+                    { nome: 'Aula 16 - Características da tabela periódica e Propriedades periódicas', importancia: 2 },
+                    { nome: 'Aula 17 - Ligação iônica', importancia: 2 },
+                    { nome: 'Aula 18 - Ligação Covalente', importancia: 2 },
+                    { nome: 'Aula 19 - Geometria Molecular e Polaridade', importancia: 2 },
+                    { nome: 'Aula 20 - Ligação Metálica', importancia: 5 },
+                    { nome: 'Aula 21 - Ligação Intermolecular', importancia: 5 },
+                    { nome: 'Aula 22 - Funções Inorgânicas: Ácidos e Bases', importancia: 4 },
+                    { nome: 'Aula 23 - Peneira Molecular', importancia: 1 },
+                    { nome: 'Aula 24 - Química do DNA', importancia: 1 },
+                    { nome: 'Aula 25 - Funções Inorgânicas: Óxidos e Sais', importancia: 4 },
+                    { nome: 'Aula 26 - Reações de Síntese e Decomposição', importancia: 1 },
+                    { nome: 'Aula 27 - Reações de Simples Troca e Dupla Troca', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO DE QUÍMICA E ENERGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Coeficiente de solubilidade', importancia: 2 },
+                    { nome: 'Aula 02 - Concentração das Soluções', importancia: 3 },
+                    { nome: 'Aula 03 - Diluição das Soluções', importancia: 3 },
+                    { nome: 'Aula 04 - Reações Químicas em Solução', importancia: 4 },
+                    { nome: 'Aula 05 - Termoquímica - Parte 1', importancia: 3 },
+                    { nome: 'Aula 06 - Termoquímica - Parte 2', importancia: 3 },
+                    { nome: 'Aula 07 - Radioatividade', importancia: 5 },
+                    { nome: 'Aula 08 - Eletrólise (aspectos qualitativos)', importancia: 5 },
+                    { nome: 'Aula 09 - Eletrólise (aspectos quantitativos)', importancia: 5 },
+                    { nome: 'Aula 10 - Pilhas', importancia: 5 },
+                    { nome: 'Aula 11 - Cinética química', importancia: 3 },
+                    { nome: 'Aula 12 - Fatores que afetam a velocidade das reações químicas', importancia: 4 },
+                    { nome: 'Aula 13 - Equilíbrio químico', importancia: 3 },
+                    { nome: 'Aula 14 - Fatores que afetam o equilíbrio químico', importancia: 4 },
+                    { nome: 'Aula 15 - Equilíbrio Iônico', importancia: 4 },
+                    { nome: 'Aula 16 - Hidrólise', importancia: 5 },
+                    { nome: 'Aula 17 - Produto de Solubilidade', importancia: 2 },
+                    { nome: 'Aula 18 - Solução Tampão', importancia: 2 },
+                    { nome: 'Aula 19 - Propriedades Coligativas', importancia: 5 },
+                    { nome: 'Aula 20 - Oxidação e Redução', importancia: 2 },
+                    { nome: 'Aula 21 - Equação de Gibbs', importancia: 2 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO DE QUÍMICA ORGÂNICA E MEIO AMBIENTE',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução, Propriedades, Classificação do Carbono e Hibridação', importancia: 1 },
+                    { nome: 'Aula 02 - Classificação das Cadeias Carbônicas', importancia: 2 },
+                    { nome: 'Aula 03 - Hidrocarbonetos - Parte 1', importancia: 4 },
+                    { nome: 'Aula 04 - Hidrocarbonetos - Parte 2', importancia: 4 },
+                    { nome: 'Aula 05 - Funções Oxigenadas - Parte 1', importancia: 3 },
+                    { nome: 'Aula 06 - Funções Oxigenadas - Parte 2', importancia: 3 },
+                    { nome: 'Aula 07 - Funções Orgânicas Nitrogenadas', importancia: 3 },
+                    { nome: 'Aula 08 - Isomeria Plana', importancia: 3 },
+                    { nome: 'Aula 09 - Isomeria Espacial Geométrica', importancia: 4 },
+                    { nome: 'Aula 10 - Isomeria espacial óptica', importancia: 3 },
+                    { nome: 'Aula 11 - Polímeros', importancia: 3 },
+                    { nome: 'Aula 12 - Previsão de Acidez e Basicidade', importancia: 1 },
+                    { nome: 'Aula 13 - Esterificação', importancia: 2 },
+                    { nome: 'Aula 14 - Transesterificação', importancia: 2 },
+                    { nome: 'Aula 15 - Reativo de Tollens e Fehlings', importancia: 1 },
+                    { nome: 'Aula 16 - Isômeros Meso e Derivados Alênicos', importancia: 1 },
+                    { nome: 'Aula 17 - Reações Orgânicas - Parte 1', importancia: 3 },
+                    { nome: 'Aula 18 - Reações Orgânicas - Parte 2', importancia: 3 },
+                    { nome: 'Aula 19 - Reações Orgânicas - Parte 3', importancia: 3 },
+                    { nome: 'Aula 20 - Reações Orgânicas - Parte 4', importancia: 3 },
+                    { nome: 'Aula 21 - Recursos Naturais', importancia: 5 },
+                    { nome: 'Aula 22 - Lixo', importancia: 5 },
+                    { nome: 'Aula 23 - Saponificação', importancia: 5 }
+                  ]
+                }
+              ]
+            },
+            // FÍSICA
+            {
+              nome: 'Física',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - APRESENTAÇÃO DO CURSO',
+                  aulas: [
+                    { nome: 'Aula 01 - Apresentação do curso de Física' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - ELÉTRICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Eletrização e Força Elétrica', importancia: 3 },
+                    { nome: 'Aula 02 - Campo Elétrico e Potencial Elétrico', importancia: 2 },
+                    { nome: 'Aula 03 - Corrente Elétrica e Leis de Ohm', importancia: 5 },
+                    { nome: 'Aula 04 - Associação de Resistores', importancia: 4 },
+                    { nome: 'Aula 05 - Medidores e Dispositivos Elétricos', importancia: 5 },
+                    { nome: 'Aula 06 - Potência Elétrica e Energia', importancia: 2 },
+                    { nome: 'Aula 07 - Gerador Elétrico', importancia: 3 },
+                    { nome: 'Aula 08 - Método para resolver circuito', importancia: 5 },
+                    { nome: 'Aula 09 - Receptor Elétrico', importancia: 3 },
+                    { nome: 'Aula 10 - Revisão' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - MAGNETISMO',
+                  aulas: [
+                    { nome: 'Aula 01 - Campo Magnético', importancia: 4 },
+                    { nome: 'Aula 02 - Campo Magnético Artificial', importancia: 4 },
+                    { nome: 'Aula 03 - Força Magnética em Partícula Eletrizada', importancia: 4 },
+                    { nome: 'Aula 04 - Força Magnética em Fios com Corrente Elétrica', importancia: 3 },
+                    { nome: 'Aula 05 - Indução Eletromagnética', importancia: 5 },
+                    { nome: 'Aula 06 - Aplicações do Eletromagnetismo', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - DINÂMICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Força Resultante', importancia: 5 },
+                    { nome: 'Aula 02 - A 1ª e a 2ª Leis de Newton', importancia: 5 },
+                    { nome: 'Aula 03 - As principais forças e a 3ª lei de Newton', importancia: 5 },
+                    { nome: 'Aula 04 - Força de atrito', importancia: 5 },
+                    { nome: 'Aula 05 - Sistemas de blocos', importancia: 4 },
+                    { nome: 'Aula 06 - Força resultante centrípeta', importancia: 5 },
+                    { nome: 'Aula 07 - Energia, trabalho e potência', importancia: 4 },
+                    { nome: 'Aula 08 - Energia Cinética e Energia Potencial', importancia: 4 },
+                    { nome: 'Aula 09 - Conservação da quantidade energia mecânica', importancia: 5 },
+                    { nome: 'Aula 10 - Impulso e quantidade de movimento', importancia: 4 },
+                    { nome: 'Aula 11 - Aplicações da dinâmica', importancia: 2 },
+                    { nome: 'Aula 12 - Revisão' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 05 - CINEMÁTICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Movimento retilíneo uniforme', importancia: 5 },
+                    { nome: 'Aula 02 - Movimento retilíneo uniformemente variado', importancia: 5 },
+                    { nome: 'Aula 03 - Queda livre e Lançamento horizontal', importancia: 3 },
+                    { nome: 'Aula 04 - Lançamento Oblíquo', importancia: 3 },
+                    { nome: 'Aula 05 - Movimento Circular Uniforme', importancia: 4 },
+                    { nome: 'Aula 06 - Leis de Kepler e Newton', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 06 - ESTÁTICA E HIDROSTÁTICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Estática dos sólidos', importancia: 3 },
+                    { nome: 'Aula 02 - Hidrostática', importancia: 4 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 07 - ÓPTICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Óptica geométrica: Fundamentos e Espelho Plano', importancia: 3 },
+                    { nome: 'Aula 02 - Espelhos Esféricos', importancia: 2 },
+                    { nome: 'Aula 03 - Refração da luz', importancia: 5 },
+                    { nome: 'Aula 04 - Revisão de Óptica' },
+                    { nome: 'Aula 05 - Lentes Esféricas', importancia: 3 },
+                    { nome: 'Aula 06 - Ametropias da visão', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 08 - TERMOLOGIA E TERMODINÂMICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Temperatura e Dilatação', importancia: 3 },
+                    { nome: 'Aula 02 - Propagação de Calor', importancia: 4 },
+                    { nome: 'Aula 03 - Calor Sensível', importancia: 5 },
+                    { nome: 'Aula 04 - Calor Latente', importancia: 4 },
+                    { nome: 'Aula 05 - Gás Ideal e Suas Transformações', importancia: 4 },
+                    { nome: 'Aula 06 - 1ª Lei da Termodinâmica', importancia: 2 },
+                    { nome: 'Aula 07 - 2ª Lei da Termodinâmica', importancia: 4 },
+                    { nome: 'Aula 08 - Máquinas Térmicas', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 09 - ONDULATÓRIA',
+                  aulas: [
+                    { nome: 'Aula 01 - O Estudo das Ondas', importancia: 5 },
+                    { nome: 'Aula 02 - Ondas em Cordas', importancia: 3 },
+                    { nome: 'Aula 03 - Fenômenos da Ondulatória', importancia: 5 },
+                    { nome: 'Aula 04 - Fenômenos da Acústica', importancia: 5 },
+                    { nome: 'Aula 05 - Cordas Vibrantes', importancia: 5 },
+                    { nome: 'Aula 06 - Tubos Sonoros', importancia: 5 }
+                  ]
+                }
+              ]
+            },
+            // BIOLOGIA
+            {
+              nome: 'Biologia',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - INTRODUÇÃO À BIOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução à Biologia', importancia: 5 },
+                    { nome: 'Aula 02 - Origem da Vida - Parte 1', importancia: 2 },
+                    { nome: 'Aula 03 - Origem da Vida - Parte 2', importancia: 2 },
+                    { nome: 'Aula 04 - Metodologia Científica', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - BIOQUÍMICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Água', importancia: 2 },
+                    { nome: 'Aula 02 - Sais Minerais', importancia: 2 },
+                    { nome: 'Aula 03 - Vitaminas', importancia: 1 },
+                    { nome: 'Aula 04 - Ácidos Nucleicos - DNA e RNA', importancia: 5 },
+                    { nome: 'Aula 05 - Duplicação do DNA', importancia: 5 },
+                    { nome: 'Aula 06 - Transcrição e Tradução', importancia: 1 },
+                    { nome: 'Aula 07 - Mutações Pontuais', importancia: 2 },
+                    { nome: 'Aula 08 - Carboidratos', importancia: 2 },
+                    { nome: 'Aula 09 - Lipídios', importancia: 2 },
+                    { nome: 'Aula 10 - Proteínas e Enzimas', importancia: 2 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - CITOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução à Citologia', importancia: 1 },
+                    { nome: 'Aula 02 - Membrana Plasmática', importancia: 5 },
+                    { nome: 'Aula 03 - Citoplasma', importancia: 4 },
+                    { nome: 'Aula 04 - Organelas Citoplasmáticas - Parte 1', importancia: 5 },
+                    { nome: 'Aula 05 - Organelas Citoplasmáticas - Parte 2', importancia: 5 },
+                    { nome: 'Aula 06 - Núcleo e cariótipo celular', importancia: 3 },
+                    { nome: 'Aula 07 - Introdução ao ciclo celular + Mitose', importancia: 4 },
+                    { nome: 'Aula 08 - Meiose', importancia: 4 },
+                    { nome: 'Aula 09 - Ciclo de vida dos seres vivos', importancia: 3 },
+                    { nome: 'Aula 10 - Erros cromossômicos numéricos e estruturais', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - BIOENERGÉTICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução à Bioenergética', importancia: 5 },
+                    { nome: 'Aula 02 - Fotossíntese - Parte 1', importancia: 5 },
+                    { nome: 'Aula 03 - Fotossíntese - Parte 2', importancia: 4 },
+                    { nome: 'Aula 04 - Quimiossíntese', importancia: 2 },
+                    { nome: 'Aula 05 - Respiração Celular', importancia: 5 },
+                    { nome: 'Aula 06 - Fermentação', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 05 - REPRODUÇÃO',
+                  aulas: [
+                    { nome: 'Aula 01 - Reprodução Geral', importancia: 2 },
+                    { nome: 'Aula 02 - Anatomia do sistema reprodutor masculino e feminino', importancia: 2 },
+                    { nome: 'Aula 03 - O Ciclo Menstrual', importancia: 5 },
+                    { nome: 'Aula 04 - Gametogênese Masculina e Feminina', importancia: 2 },
+                    { nome: 'Aula 05 - Métodos Contraceptivos', importancia: 2 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 06 - EMBRIOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - ISTs - Infecções sexualmente transmissíveis', importancia: 2 },
+                    { nome: 'Aula 02 - Embriologia animal: tipos de ovos, segmentação e desenvolvimento embrionário do anfioxo', importancia: 1 },
+                    { nome: 'Aula 03 - Conceitos de zoologia, tipos de gastrulação, neurulação, histogênese e a organogêneses', importancia: 1 },
+                    { nome: 'Aula 04 - Embriologia animal: anexos embrionários nos vertebrados', importancia: 1 },
+                    { nome: 'Aula 05 - Desenvolvimento embrionário da espécie humana', importancia: 2 },
+                    { nome: 'Aula 06 - Formação de gêmeos univitelinos, bivitelinos, semi-idênticos e xifópagos (siameses)', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 07 - HISTOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Tecidos Epiteliais de Revestimento e Glandular', importancia: 2 },
+                    { nome: 'Aula 02 - Pele e Queimaduras', importancia: 5 },
+                    { nome: 'Aula 03 - Tecidos Conjuntivos', importancia: 1 },
+                    { nome: 'Aula 04 - Tecido Sanguíneo', importancia: 5 },
+                    { nome: 'Aula 05 - Imunologia: sistema imunitário, imunização passiva, ativa, coagulação, soro, vacina, alergia e febre', importancia: 5 },
+                    { nome: 'Aula 06 - Tecido muscular e fisiologia da contração (catraca de Huxley)', importancia: 3 },
+                    { nome: 'Aula 07 - Tecido nervoso e transmissão do impulso nervoso', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 08 - ECOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução à Ecologia: Cadeias Alimentares, Pirâmides Ecológicas e Fluxo de Energia', importancia: 5 },
+                    { nome: 'Aula 02 - Ciclos Biogeoquímicos', importancia: 5 },
+                    { nome: 'Aula 03 - Dinâmica das populações', importancia: 3 },
+                    { nome: 'Aula 04 - Relações ecológicas', importancia: 5 },
+                    { nome: 'Aula 05 - Sucessões ecológicas', importancia: 4 },
+                    { nome: 'Aula 06 - Biomas aquáticos', importancia: 1 },
+                    { nome: 'Aula 07 - Biomas terrestres', importancia: 5 },
+                    { nome: 'Aula 08 - Biomas brasileiros', importancia: 5 },
+                    { nome: 'Aula 09 - Poluição e Desequilíbrio ecológico', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 09 - EVOLUÇÃO',
+                  aulas: [
+                    { nome: 'Aula 01 - Evolução: suas teorias (Lamarck, Darwin e Neodarwinismo) e evidências evolutivas', importancia: 5 },
+                    { nome: 'Aula 02 - Teoria da Especiação e Isolamento reprodutivo', importancia: 5 },
+                    { nome: 'Aula 03 - Evolução humana', importancia: 1 },
+                    { nome: 'Aula 04 - Eras geológicas', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 10 - FISIOLOGIA ANIMAL',
+                  aulas: [
+                    { nome: 'Aula 01 - Digestão Humana', importancia: 5 },
+                    { nome: 'Aula 02 - Digestão Comparada dos Animais', importancia: 3 },
+                    { nome: 'Aula 03 - Sistema Circulatório', importancia: 5 },
+                    { nome: 'Aula 04 - Circulação Comparada dos Seres Vivos', importancia: 4 },
+                    { nome: 'Aula 05 - Sistema Linfático', importancia: 1 },
+                    { nome: 'Aula 06 - Respiração Humana', importancia: 5 },
+                    { nome: 'Aula 07 - Respiração Comparada', importancia: 2 },
+                    { nome: 'Aula 08 - Sistema Urinário: Excreção Humana e Controle Hormonal (ADH, Aldosterona e PNA)', importancia: 5 },
+                    { nome: 'Aula 09 - Sistema Excretor Comparado', importancia: 2 },
+                    { nome: 'Aula 10 - Sistema Endócrino', importancia: 5 },
+                    { nome: 'Aula 11 - Termorregulação', importancia: 5 },
+                    { nome: 'Aula 12 - Sistema Nervoso', importancia: 5 },
+                    { nome: 'Aula 13 - Sistema Sensorial', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 11 - TAXONOMIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Taxonomia e Filogenia', importancia: 3 },
+                    { nome: 'Aula 02 - Plesiomorfia, Apomorfia e Sinapomorfia' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 12 - BOTÂNICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução aos Estudos das Plantas', importancia: 5 },
+                    { nome: 'Aula 02 - Estudos dos grandes grupos vegetais e suas formas de reprodução', importancia: 5 },
+                    { nome: 'Aula 03 - Histologia Vegetal', importancia: 2 },
+                    { nome: 'Aula 04 - Morfologia Vegetal', importancia: 1 },
+                    { nome: 'Aula 05 - Fisiologia Vegetal', importancia: 3 },
+                    { nome: 'Aula 06 - Floração', importancia: 2 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 13 - GENÉTICA E BIOTECNOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Genética Mendeliana', importancia: 5 },
+                    { nome: 'Aula 02 - Estudo dos Heredogramas', importancia: 5 },
+                    { nome: 'Aula 03 - Sistema ABO de Grupos Sanguíneos', importancia: 5 },
+                    { nome: 'Aula 04 - A Segunda Lei de Mendel e Sua Proporção Clássica', importancia: 5 },
+                    { nome: 'Aula 05 - Ligação Gênica', importancia: 3 },
+                    { nome: 'Aula 06 - Determinação do Sexo e Heranças Genéticas Sexuais: Ligada, Holândrica, Limitada e Influenciada', importancia: 5 },
+                    { nome: 'Aula 07 - Genética de Populações: Princípios do Equilíbrio de Hardy-Weinberg', importancia: 4 },
+                    { nome: 'Aula 08 - Biotecnologia', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 14 - MICROBIOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Programa de Saúde: Conceitos Gerais', importancia: 2 },
+                    { nome: 'Aula 02 - Vírus', importancia: 2 },
+                    { nome: 'Aula 03 - Bactérias', importancia: 1 },
+                    { nome: 'Aula 04 - Reino Protoctista: Protozoários e Algas', importancia: 1 },
+                    { nome: 'Aula 05 - Reino Fungi', importancia: 1 },
+                    { nome: 'Aula 06 - Viroses e Bacterioses', importancia: 1 },
+                    { nome: 'Aula 07 - Doenças Parasitárias do Brasil: Protozooses', importancia: 5 },
+                    { nome: 'Aula 08 - Verminoses', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 15 - ZOOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Zoologia dos Invertebrados', importancia: 1 },
+                    { nome: 'Aula 02 - Poríferos, Cnidários e Platelmintos', importancia: 1 },
+                    { nome: 'Aula 03 - Nematelmintos, Moluscos e Anelídeos', importancia: 1 },
+                    { nome: 'Aula 04 - Artrópodes', importancia: 3 },
+                    { nome: 'Aula 05 - Equinodermos, Protocordados e Peixes', importancia: 1 },
+                    { nome: 'Aula 06 - Cordados Vertebrados (Anfíbios e Répteis)', importancia: 1 },
+                    { nome: 'Aula 07 - Cordados Vertebrados (Aves e Mamíferos)', importancia: 1 }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          nome: 'Ciências Humanas e suas Tecnologias',
+          disciplinas: [
+            // GEOGRAFIA E ATUALIDADES
+            {
+              nome: 'Geografia e Atualidades',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - INTRODUÇÃO AOS ESTUDOS DA GEOGRAFIA',
+                  aulas: [
+                    { nome: 'Aula 01 - História do Pensamento Geográfico: Conceitos e Princípios', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - ATUALIDADES',
+                  aulas: [
+                    { nome: 'Aula 01 - Geografia da Saúde', importancia: 2 },
+                    { nome: 'Aula 02 - Violência Urbana no Brasil', importancia: 5 },
+                    { nome: 'Aula 03 - Será a Terceira Guerra Mundial', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - GEOGRAFIA FÍSICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Cartografia', importancia: 2 },
+                    { nome: 'Aula 02 - Superfícies da Terra - Parte 1', importancia: 2 },
+                    { nome: 'Aula 03 - Superfícies da Terra - Parte 2', importancia: 2 },
+                    { nome: 'Aula 04 - Mecanismos do clima e circulação atmosférica - Parte 1', importancia: 3 },
+                    { nome: 'Aula 05 - Características climáticas do território brasileiro - Parte 2', importancia: 3 },
+                    { nome: 'Aula 06 - Os domínios de vegetação e natureza no mundo - Parte 1', importancia: 2 },
+                    { nome: 'Aula 07 - Os domínios de vegetação e natureza no Brasil - Parte 2', importancia: 2 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - MEIO AMBIENTE E ENERGIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Os Problemas Ambientais e a Política Ambiental Brasileira', importancia: 3 },
+                    { nome: 'Aula 02 - Mudanças Climáticas e Conferências Ambientais', importancia: 3 },
+                    { nome: 'Aula 03 - Fontes de Energia', importancia: 4 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 05 - GEOPOLÍTICA E GEOECONOMIA',
+                  aulas: [
+                    { nome: 'Aula 01 - A mundialização do capitalismo e as grandes instituições financeiras mundiais', importancia: 4 },
+                    { nome: 'Aula 02 - A formação dos blocos econômicos e globalização', importancia: 4 },
+                    { nome: 'Aula 03 - A nova divisão internacional do trabalho (DIT) e o mundo do trabalho no séc. XXI', importancia: 4 },
+                    { nome: 'Aula 04 - As Transformações no Leste Europeu: Guerra Fria e Cortina de Ferro e a Formação Territorial do Mundo no Fim do Século XX e Início do Séc. XXI', importancia: 3 },
+                    { nome: 'Aula 05 - Nova Ordem Mundial: China, Rússia e EUA', importancia: 4 },
+                    { nome: 'Aula 06 - China: a Construção de uma Grande Potência', importancia: 3 },
+                    { nome: 'Aula 07 - Características econômicas e territoriais dos países de industrialização avançadas ou desenvolvidos', importancia: 1 },
+                    { nome: 'Aula 08 - Características econômicas e territoriais dos países de industrialização tardia e novos emergentes', importancia: 1 },
+                    { nome: 'Aula 09 - Conflitos na Ásia', importancia: 2 },
+                    { nome: 'Aula 10 - Conflitos no Oriente Médio e África', importancia: 3 },
+                    { nome: 'Aula 11 - América Latina e Caribe: Política e Crise', importancia: 2 },
+                    { nome: 'Aula 12 - A inserção do Brasil no capitalismo monopolista mundial: Um modelo internacional', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 06 - REVISÃO DO 1º SEMESTRE',
+                  aulas: [
+                    { nome: 'Aula 01 - Revisão do 1º Semestre' },
+                    { nome: 'Aula 02 - Revisão do 1º Semestre' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 07 - POPULAÇÃO',
+                  aulas: [
+                    { nome: 'Aula 01 - População (Brasil e Mundo)', importancia: 3 },
+                    { nome: 'Aula 02 - Novos Processos Migratórios', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 08 - INDÚSTRIA E URBANIZAÇÃO',
+                  aulas: [
+                    { nome: 'Aula 01 - A Industrialização Brasileira', importancia: 3 },
+                    { nome: 'Aula 02 - Urbanização (Brasil e Mundo)', importancia: 4 },
+                    { nome: 'Aula 03 - Questões Urbanas', importancia: 4 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 09 - GEOGRAFIA AGRÁRIA',
+                  aulas: [
+                    { nome: 'Aula 01 - A Industrialização da Agricultura e a Produção Agropecuária no Brasil', importancia: 4 },
+                    { nome: 'Aula 02 - A Questão Agrária: Reforma Agrária, Conflitos no Campo e a Questão Indígena no Brasil', importancia: 4 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 10 - REGIONALIZAÇÃO',
+                  aulas: [
+                    { nome: 'Aula 01 - A Organização do Estado Brasileiro', importancia: 2 },
+                    { nome: 'Aula 02 - Geografia Cultural', importancia: 1 }
+                  ]
+                }
+              ]
+            },
+            // HISTÓRIA DO BRASIL
+            {
+              nome: 'História do Brasil',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - BRASIL E O PROCESSO COLONIZADOR',
+                  aulas: [
+                    { nome: 'Aula 01 - A Expansão Marítima (As Grandes Navegações)', importancia: 5 },
+                    { nome: 'Aula 02 - O Brasil Pré-Cabralino, as Sociedades Ameríndias e o Período Pré-Colonial', importancia: 2 },
+                    { nome: 'Aula 03 - Início da colonização: as Capitanias Hereditárias e o Governo-Geral', importancia: 3 },
+                    { nome: 'Aula 04 - A Sociedade do Açúcar e a Economia Complementar Colonial', importancia: 5 },
+                    { nome: 'Aula 05 - A União Ibérica e o Brasil Holandês', importancia: 2 },
+                    { nome: 'Aula 06 - Bandeiras, Entradas, Monções e Expansão das Fronteiras', importancia: 3 },
+                    { nome: 'Aula 07 - Movimentos Nativistas', importancia: 1 },
+                    { nome: 'Aula 08 - Ciclo da Mineração e Período Pombalino', importancia: 5 },
+                    { nome: 'Aula 09 - Movimentos Emancipacionistas', importancia: 4 },
+                    { nome: 'Aula 10 - Período Joanino', importancia: 4 },
+                    { nome: 'Aula 11 - Processo de Independência', importancia: 2 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - BRASIL IMPÉRIO',
+                  aulas: [
+                    { nome: 'Aula 01 - Primeiro Reinado (1822 - 1831)', importancia: 3 },
+                    { nome: 'Aula 02 - Período Regencial (1831 - 1840)', importancia: 2 },
+                    { nome: 'Aula 03 - Revoltas Regenciais', importancia: 2 },
+                    { nome: 'Aula 04 - Segundo Reinado (Parte 1): Política e Economia', importancia: 5 },
+                    { nome: 'Aula 05 - Segundo Reinado (Parte 2): Guerra do Paraguai e Declínio', importancia: 4 },
+                    { nome: 'Aula 06 - Processo de Proclamação da República e a República da Espada', importancia: 2 },
+                    { nome: 'Aula 07 - Escravidão', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - BRASIL REPÚBLICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Primeira República: Estruturas Políticas e Econômicas', importancia: 4 },
+                    { nome: 'Aula 02 - Primeira República: Revoltas e Movimentos', importancia: 4 },
+                    { nome: 'Aula 03 - Era Vargas (Parte 1): Revolução de 1930, Governo provisório e Governo constitucional', importancia: 5 },
+                    { nome: 'Aula 04 - Era Vargas (Parte 2): O Estado Novo', importancia: 5 },
+                    { nome: 'Aula 05 - Governo de Dutra e Segundo Governo Vargas', importancia: 3 },
+                    { nome: 'Aula 06 - Governo JK e Jânio Quadros', importancia: 4 },
+                    { nome: 'Aula 07 - O Governo de João Goulart e os Primeiros Governos Militares (Castelo Branco e Costa e Silva)', importancia: 5 },
+                    { nome: 'Aula 08 - Ditadura Militar: O Ápice e o Declínio (Governos Médici, Geisel e Figueiredo)', importancia: 5 },
+                    { nome: 'Aula 09 - A República Nova', importancia: 4 }
+                  ]
+                }
+              ]
+            },
+            // HISTÓRIA GERAL
+            {
+              nome: 'História Geral',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - INTRODUÇÃO AOS ESTUDOS HISTÓRICOS',
+                  aulas: [
+                    { nome: 'Aula 01 - Os Fundamentos da História', importancia: 5 },
+                    { nome: 'Aula 02 - Pré-História', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - IDADE ANTIGA',
+                  aulas: [
+                    { nome: 'Aula 01 - Antiguidade Oriental', importancia: 1 },
+                    { nome: 'Aula 02 - Grécia (Parte 1): Das origens até o surgimento da democracia', importancia: 2 },
+                    { nome: 'Aula 03 - Grécia (Parte 2): O Período Clássico e o Período Helenístico', importancia: 4 },
+                    { nome: 'Aula 04 - Roma (Parte 1): A Monarquia e a República', importancia: 4 },
+                    { nome: 'Aula 05 - Roma (Parte 2): A Fase do Império', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - IDADE MÉDIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Alta Idade Média Ocidental', importancia: 4 },
+                    { nome: 'Aula 02 - Baixa Idade Média Ocidental', importancia: 4 },
+                    { nome: 'Aula 03 - A Civilização Islâmica', importancia: 4 },
+                    { nome: 'Aula 04 - A Civilização Bizantina', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - IDADE MODERNA',
+                  aulas: [
+                    { nome: 'Aula 01 - Renascimento Cultural', importancia: 3 },
+                    { nome: 'Aula 02 - Reforma Protestante (Parte 1): Antecedentes e Luteranismo', importancia: 5 },
+                    { nome: 'Aula 03 - Reforma Protestante (Parte 2): Calvinismo, Anglicanismo e Contrarreforma', importancia: 5 },
+                    { nome: 'Aula 04 - Formação das Monarquias Nacionais, Absolutismo e Mercantilismo', importancia: 3 },
+                    { nome: 'Aula 05 - Revoluções Inglesas do Século XVII', importancia: 1 },
+                    { nome: 'Aula 06 - Revolução Industrial', importancia: 5 },
+                    { nome: 'Aula 07 - Iluminismo, Fisiocracia e Liberalismo', importancia: 4 },
+                    { nome: 'Aula 08 - Processo de Independência dos Estados Unidos', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 05 - IDADE CONTEMPORÂNEA',
+                  aulas: [
+                    { nome: 'Aula 01 - Revolução Francesa (Parte 1): Dos antecedentes até o fim da Monarquia Constitucional', importancia: 5 },
+                    { nome: 'Aula 02 - Revolução Francesa (Parte 2): A Convenção Nacional, o Diretório e o Golpe do 18 de Brumário', importancia: 5 },
+                    { nome: 'Aula 03 - Era Napoleônica', importancia: 5 },
+                    { nome: 'Aula 04 - A Expansão dos Estados Unidos para o Oeste e a Guerra de Secessão', importancia: 3 },
+                    { nome: 'Aula 05 - O Imperialismo e a Segunda Revolução Industrial', importancia: 4 },
+                    { nome: 'Aula 06 - Unificações da Alemanha e Itália e a Primeira Guerra Mundial (1914 - 1918)', importancia: 5 },
+                    { nome: 'Aula 07 - A Revolução Russa de 1917', importancia: 3 },
+                    { nome: 'Aula 08 - Período Entreguerras: A Crise de 1929 e os Totalitarismos', importancia: 4 },
+                    { nome: 'Aula 09 - A Segunda Guerra Mundial (1939 - 1945)', importancia: 5 },
+                    { nome: 'Aula 10 - Guerra Fria (Parte 1): Origens, Descolonização Afro-Asiática e 1968', importancia: 5 },
+                    { nome: 'Aula 11 - Guerra Fria (Parte 2): Conflitos na Ásia, Revolução Cubana, Crise dos Misseis de Cuba e o fim da União Soviética', importancia: 5 }
+                  ]
+                }
+              ]
+            },
+            // FILOSOFIA
+            {
+              nome: 'Filosofia',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - FILOSOFIA ANTIGA',
+                  aulas: [
+                    { nome: 'Aula 00 - Aula Zero' },
+                    { nome: 'Aula 01 - Introdução à Filosofia', importancia: 4 },
+                    { nome: 'Aula 02 - Pré-Socráticos', importancia: 5 },
+                    { nome: 'Aula 03 - Sócrates e os Sofistas', importancia: 5 },
+                    { nome: 'Aula 04 - Platão', importancia: 5 },
+                    { nome: 'Aula 05 - Aristóteles', importancia: 5 },
+                    { nome: 'Aula 06 - Filosofia Helenística', importancia: 4 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - FILOSOFIA MEDIEVAL',
+                  aulas: [
+                    { nome: 'Aula 01 - Filosofia Medieval', importancia: 4 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - FILOSOFIA MODERNA',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução à Filosofia Moderna', importancia: 5 },
+                    { nome: 'Aula 02 - Racionalismo', importancia: 5 },
+                    { nome: 'Aula 03 - Empirismo', importancia: 5 },
+                    { nome: 'Aula 04 - Criticismo Kantiano', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - FILOSOFIA POLÍTICA',
+                  aulas: [
+                    { nome: 'Aula 01 - A Introdução da Política', importancia: 4 },
+                    { nome: 'Aula 02 - Maquiavel', importancia: 5 },
+                    { nome: 'Aula 03 - Os Contratualistas', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 05 - ANTROPOLOGIA FILOSÓFICA E ÉTICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Antropologia filosófica: cultura e linguagem', importancia: 3 },
+                    { nome: 'Aula 02 - Antropologia filosófica: trabalho e ócio', importancia: 5 },
+                    { nome: 'Aula 03 - Introdução à Ética', importancia: 5 },
+                    { nome: 'Aula 04 - Filosofia Moral: Utilitarismo e Imperativo categórico', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 06 - FILOSOFIA CONTEMPORÂNEA',
+                  aulas: [
+                    { nome: 'Aula 01 - Introdução à Filosofia Contemporânea', importancia: 4 },
+                    { nome: 'Aula 02 - A filosofia de Hegel', importancia: 4 },
+                    { nome: 'Aula 03 - Existencialismo: Kierkegaard, Albert Camus e Sartre', importancia: 5 },
+                    { nome: 'Aula 04 - Nietzsche', importancia: 5 },
+                    { nome: 'Aula 05 - Escola de Frankfurt: Razão instrumental e Teoria Crítica', importancia: 5 },
+                    { nome: 'Aula 06 - Escola de Frankfurt: Habermas', importancia: 5 },
+                    { nome: 'Aula 07 - Escola de Frankfurt: Walter Benjamin e Herbert Marcuse', importancia: 5 },
+                    { nome: 'Aula 08 - Revisão', importancia: 5 },
+                    { nome: 'Aula 09 - Michel Foucault', importancia: 5 },
+                    { nome: 'Aula 10 - Hannah Arendt', importancia: 5 },
+                    { nome: 'Aula 11 - Francois Lyotard e Gilles Deleuze', importancia: 5 },
+                    { nome: 'Aula 12 - Rawls e sua Teoria da Justiça', importancia: 4 },
+                    { nome: 'Aula 13 - Byung-Chul Han', importancia: 4 },
+                    { nome: 'Aula 14 - Ailton Krenak', importancia: 4 },
+                    { nome: 'Aula 15 - Estética', importancia: 4 },
+                    { nome: 'Aula 16 - Niilismo', importancia: 4 },
+                    { nome: 'Aula 17 - Gilles Lipovetsky', importancia: 3 }
+                  ]
+                }
+              ]
+            },
+            // SOCIOLOGIA
+            {
+              nome: 'Sociologia',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - TEORIA DA SOCIOLOGIA',
+                  aulas: [
+                    { nome: 'Aula 00 - Aula Zero' },
+                    { nome: 'Aula 01 - Introdução à Sociologia', importancia: 4 },
+                    { nome: 'Aula 02 - O pensamento de Émile Durkheim', importancia: 5 },
+                    { nome: 'Aula 03 - O pensamento de Max Weber', importancia: 5 },
+                    { nome: 'Aula 04 - O pensamento de Karl Marx', importancia: 5 },
+                    { nome: 'Aula 05 - A Sociologia e a Relação entre Indivíduo e Sociedade', importancia: 4 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - MOVIMENTOS SOCIAIS',
+                  aulas: [
+                    { nome: 'Aula 01 - Movimentos Sociais Tradicionais', importancia: 5 },
+                    { nome: 'Aula 02 - Movimentos Sociais Contemporâneos', importancia: 5 },
+                    { nome: 'Aula 03 - Movimentos Sociais no Brasil', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - A SOCIOLOGIA NO BRASIL',
+                  aulas: [
+                    { nome: 'Aula 01 - A Sociologia no Brasil: Gilberto Freyre, Sérgio Buarque de Holanda, Caio Prado Jr e Florestan Fernandes', importancia: 5 },
+                    { nome: 'Aula 02 - A Sociologia no Brasil: Darcy Ribeiro, Paulo Freire e Raymundo Faoro', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - DISCUSSÕES SOCIOLÓGICAS',
+                  aulas: [
+                    { nome: 'Aula 01 - Cultura e Sociedade', importancia: 5 },
+                    { nome: 'Aula 02 - Raça, Etnia e Multiculturalismo', importancia: 5 },
+                    { nome: 'Aula 03 - Socialização e Controle Social', importancia: 5 },
+                    { nome: 'Aula 04 - Estado, Poder e Política', importancia: 5 },
+                    { nome: 'Aula 05 - Democracia e Cidadania', importancia: 5 },
+                    { nome: 'Aula 06 - Trabalho e Sociedade: A "evolução" histórica do trabalho', importancia: 4 },
+                    { nome: 'Aula 07 - Trabalho e Sociedade na Contemporaneidade', importancia: 5 },
+                    { nome: 'Aula 08 - Estratificação e desigualdades sociais', importancia: 4 },
+                    { nome: 'Aula 09 - Sociologia Urbana', importancia: 5 },
+                    { nome: 'Aula 10 - Globalização e novos intercâmbios sociais', importancia: 5 },
+                    { nome: 'Aula 11 - Gênero e Sexualidade', importancia: 3 },
+                    { nome: 'Aula 12 - Sociedade e violência', importancia: 4 },
+                    { nome: 'Aula 13 - Pierre Bourdieu: Poder e Violência Simbólica', importancia: 4 },
+                    { nome: 'Aula 14 - Sistema Prisional', importancia: 4 },
+                    { nome: 'Aula 15 - Internet e redes sociais', importancia: 5 },
+                    { nome: 'Aula 16 - A sociedade do espetáculo - Guy Debord', importancia: 4 },
+                    { nome: 'Aula 17 - A Modernidade Líquida', importancia: 5 },
+                    { nome: 'Aula 18 - Revisão', importancia: 5 },
+                    { nome: 'Aula 19 - Racismo, Exclusão e Representatividade', importancia: 5 },
+                    { nome: 'Aula 20 - Necropolítica e Biopolítica', importancia: 5 },
+                    { nome: 'Aula 21 - Decolonialidade', importancia: 5 },
+                    { nome: 'Aula 22 - A relação do Brasil com as minorias', importancia: 5 },
+                    { nome: 'Aula 23 - Ideologia', importancia: 5 },
+                    { nome: 'Aula 24 - ABC do Capitalismo e Socialismo', importancia: 5 },
+                    { nome: 'Aula 25 - ABC do Liberalismo e Neoliberalismo', importancia: 5 }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          nome: 'Linguagens e suas Tecnologias',
+          disciplinas: [
+            // LITERATURA
+            {
+              nome: 'Literatura',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - ARTE AFRICANA',
+                  aulas: [
+                    { nome: 'Aula 01 - Arte Africana', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - PERÍODO RENASCENTISTA',
+                  aulas: [
+                    { nome: 'Aula 01 - Renascimento - Parte 1', importancia: 3 },
+                    { nome: 'Aula 02 - Renascimento - Parte 2', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - IDADE MODERNA',
+                  aulas: [
+                    { nome: 'Aula 01 - Maneirismo', importancia: 1 },
+                    { nome: 'Aula 02 - Quinhentismo', importancia: 4 },
+                    { nome: 'Aula 03 - Barroco (artes plásticas)', importancia: 3 },
+                    { nome: 'Aula 04 - Barroco (literatura)', importancia: 3 },
+                    { nome: 'Aula 05 - Rococó', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - IDADE CONTEMPORÂNEA',
+                  aulas: [
+                    { nome: 'Aula 01 - Arte Neoclássica - Arcadismo (Artes Plásticas)', importancia: 4 },
+                    { nome: 'Aula 02 - Arte Neoclássica - Arcadismo (Literatura)', importancia: 4 },
+                    { nome: 'Aula 03 - Romantismo', importancia: 4 },
+                    { nome: 'Aula 04 - Romantismo no Brasil (poesia)', importancia: 4 },
+                    { nome: 'Aula 05 - Romantismo no Brasil (prosa)', importancia: 5 },
+                    { nome: 'Aula 06 - Realismo', importancia: 5 },
+                    { nome: 'Aula 07 - Realismo (para a Redação e para a vida)', importancia: 5 },
+                    { nome: 'Aula 08 - Naturalismo', importancia: 4 },
+                    { nome: 'Aula 09 - Parnasianismo', importancia: 3 },
+                    { nome: 'Aula 10 - Simbolismo', importancia: 3 },
+                    { nome: 'Aula 11 - Impressionismo', importancia: 2 },
+                    { nome: 'Aula 12 - Impressionismo: Vincent Van Gogh (1853 - 1890)', importancia: 1 },
+                    { nome: 'Aula 13 - A arte da Belle Époque', importancia: 1 },
+                    { nome: 'Semana Especial - Expressões Artísticas e Literárias' },
+                    { nome: 'Aula 14 - Pré-Modernismo', importancia: 5 },
+                    { nome: 'Aula 15 - Vanguardas europeias - Introdução, Fauvsimo e Expressionismo', importancia: 5 },
+                    { nome: 'Aula 16 - Vanguardas europeias - Cubismo', importancia: 5 },
+                    { nome: 'Aula 17 - Vanguardas europeias - Futurismo, Dadaísmo e Surrealismo', importancia: 5 },
+                    { nome: 'Aula 18 - Semana de Arte Moderna', importancia: 5 },
+                    { nome: 'Aula 19 - 1ª Geração do Modernismo (1922 - 1930)', importancia: 5 },
+                    { nome: 'Aula 20 - 1ª Geração do Modernismo (1922 - 1930): autores e obras', importancia: 5 },
+                    { nome: 'Aula 21 - 1ª Geração do Modernismo (1922 - 1930): artes plásticas', importancia: 5 },
+                    { nome: 'Aula 22 - 2ª Geração do Modernismo: poesia', importancia: 5 },
+                    { nome: 'Aula 23 - 2ª Geração do Modernismo: prosa', importancia: 5 },
+                    { nome: 'Aula 24 - 3ª Geração do Modernismo: poesia', importancia: 5 },
+                    { nome: 'Aula 25 - 3ª Geração do Modernismo: prosa', importancia: 5 },
+                    { nome: 'Aula 26 - Arte contemporânea: artes plásticas e visuais', importancia: 5 }
+                  ]
+                }
+              ]
+            },
+            // GRAMÁTICA
+            {
+              nome: 'Gramática',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - ORTOGRAFIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Problemas da norma culta', importancia: 5 },
+                    { nome: 'Aula 02 - Acentuação gráfica', importancia: 4 },
+                    { nome: 'Aula 03 - Uso do hífen', importancia: 2 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - SINTAXE',
+                  aulas: [
+                    { nome: 'Aula 01 - Pronomes - Parte 1', importancia: 5 },
+                    { nome: 'Aula 02 - Pronomes - Parte 2', importancia: 5 },
+                    { nome: 'Aula 03 - Colocação Pronominal', importancia: 4 },
+                    { nome: 'Aula 04 - Crase', importancia: 4 },
+                    { nome: 'Aula 05 - Frase, oração e período', importancia: 3 },
+                    { nome: 'Aula 06 - Termos Essenciais da Oração', importancia: 2 },
+                    { nome: 'Aula 07 - Termos Integrantes da Oração', importancia: 2 },
+                    { nome: 'Aula 08 - Termos Acessórios da Oração', importancia: 1 },
+                    { nome: 'Aula 09 - Análise sintática do período composto (orações coordenadas)', importancia: 1 },
+                    { nome: 'Aula 10 - Análise sintática do período composto (orações subordinadas substantivas)', importancia: 1 },
+                    { nome: 'Aula 11 - Pontuação - Parte 1', importancia: 3 },
+                    { nome: 'Aula 12 - Pontuação - Parte 2', importancia: 3 },
+                    { nome: 'Aula 13 - Pontuação - Partes 3 e 4', importancia: 3 },
+                    { nome: 'Aula 14 - Análise sintática do período composto (orações subordinadas adjetivas)', importancia: 1 },
+                    { nome: 'Aula 15 - Análise sintática do período composto (orações subordinadas adverbiais)', importancia: 1 },
+                    { nome: 'Aula 16 - Concordância verbal - Parte 1', importancia: 5 },
+                    { nome: 'Aula 17 - Concordância verbal - Parte 2', importancia: 5 },
+                    { nome: 'Aula 18 - Concordância verbal - Parte 3', importancia: 5 },
+                    { nome: 'Semana Especial - Gramática' },
+                    { nome: 'Aula 19 - Concordância nominal', importancia: 5 },
+                    { nome: 'Aula 20 - Regência verbal', importancia: 3 },
+                    { nome: 'Aula 21 - Regência nominal', importancia: 1 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - GRAMÁTICA NA PRÁTICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Gramática na Prática - Parte 1', importancia: 5 },
+                    { nome: 'Aula 02 - Gramática na Prática - Parte 2', importancia: 5 },
+                    { nome: 'Aula 03 - Gramática na Prática: Texto 1' },
+                    { nome: 'Aula 04 - Gramática na Prática: Texto 2' },
+                    { nome: 'Aula 05 - Gramática na Prática: Texto 3' },
+                    { nome: 'Aula 06 - Gramática na Prática: Análise de Parágrafos - Partes 1 e 2' },
+                    { nome: 'Aula 07 - Gramática na Prática: Análise de Parágrafos - Partes 3' },
+                    { nome: 'Aula 08 - Gramática na Prática: Análise de Parágrafos - Partes 4' },
+                    { nome: 'Aula 09 - Gramática na Prática: Análise de Parágrafos - Partes 5' },
+                    { nome: 'Aula 10 - Gramática na Prática: Análise de Parágrafos - Partes 6' },
+                    { nome: 'Aula 11 - Gramática na Prática: Redações - Parte 1 e 2' },
+                    { nome: 'Aula 12 - Gramática na Prática: Redações - Parte 3' },
+                    { nome: 'Aula 13 - Gramática na Prática: Redações - Parte 4' },
+                    { nome: 'Aula 14 - Gramática na Prática: Redações - Parte 5' },
+                    { nome: 'Aula 15 - Gramática na Prática: Redações - Parte 6' },
+                    { nome: 'Aula 16 - Gramática na Prática: Redações - Parte 7' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - ESTILÍSTICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Funções da Linguagem', importancia: 5 },
+                    { nome: 'Aula 02 - Figuras da Linguagem: figuras de som e de palavras', importancia: 5 },
+                    { nome: 'Aula 03 - Figuras da Linguagem: figuras de sintaxe ou de construção', importancia: 5 },
+                    { nome: 'Aula 04 - Figuras da Linguagem: figuras de pensamento', importancia: 5 },
+                    { nome: 'Aula 05 - Variação Linguística', importancia: 5 }
+                  ]
+                }
+              ]
+            },
+            // ANÁLISE DE TEXTO
+            {
+              nome: 'Análise de Texto',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - ESTRATÉGIAS DE PROVA',
+                  aulas: [
+                    { nome: 'Aula 01 - Como estudar a prova de Linguagens', importancia: 5 },
+                    { nome: 'Aula 02 - Como aumentar a TRI', importancia: 5 },
+                    { nome: 'Aula 03 - Resolução de Questões Básicas (Enem 2022)', importancia: 5 },
+                    { nome: 'Aula 04 - Resolução de Questões Operacionais (Enem 2022) - Parte 1', importancia: 4 },
+                    { nome: 'Aula 05 - Resolução de Questões Operacionais (Enem 2022) - Parte 2', importancia: 4 },
+                    { nome: 'Aula 06 - Resolução de Questões Globais (Enem 2022)', importancia: 3 },
+                    { nome: 'Aula 07 - Resolução de Questões Básicas (Enem 2021)', importancia: 5 },
+                    { nome: 'Aula 08 - Resolução de Questões Operacionais (Enem 2021) - Parte 1', importancia: 4 },
+                    { nome: 'Aula 09 - Resolução de Questões Operacionais (Enem 2021) - Parte 2', importancia: 4 },
+                    { nome: 'Aula 10 - Resolução de Questões Globais (Enem 2021)', importancia: 3 },
+                    { nome: 'Aula 11 - Resolução de Questões Básicas (Enem 2020)', importancia: 5 },
+                    { nome: 'Aula 12 - Resolução de Questões Operacionais (Enem 2020)', importancia: 4 },
+                    { nome: 'Aula 13 - Resolução de Questões Globais (Enem 2020)', importancia: 3 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - RESOLUÇÃO DE QUESTÕES',
+                  aulas: [
+                    { nome: 'Aula 01 - Resolução de Simulado Surpresa' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 03 - COMPETÊNCIAS DO ENEM - LINGUAGENS 1',
+                  aulas: [
+                    { nome: 'Aula 01 - Competência 1 (imperdível)', importancia: 5 },
+                    { nome: 'Aula 02 - Competência 1 (habilidades 2, 3 e 4)', importancia: 5 },
+                    { nome: 'Aula 03 - Competência 3 (habilidades 9, 10 e 11)', importancia: 5 },
+                    { nome: 'Aula 04 - Competência 4 (habilidades 12, 13 e 14)', importancia: 5 },
+                    { nome: 'Aula 05 - Competência 5 (habilidade 15) - Parte 1', importancia: 5 },
+                    { nome: 'Aula 06 - Competência 5 (habilidade 16) - Parte 2', importancia: 5 },
+                    { nome: 'Aula 07 - Competência 5 (habilidade 17) - Parte 3', importancia: 5 },
+                    { nome: 'Semana Especial - Análise de Texto' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 04 - TIPOS E GÊNEROS TEXTUAIS',
+                  aulas: [
+                    { nome: 'Aula 01 - Tipos e Gêneros Textuais - Parte 1', importancia: 5 },
+                    { nome: 'Aula 02 - Tipos e Gêneros Textuais - Parte 2', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 05 - COMPETÊNCIAS DO ENEM - LINGUAGENS 2',
+                  aulas: [
+                    { nome: 'Aula 01 - Competência 6 (habilidades 18, 19 e 20) - Parte 1', importancia: 5 },
+                    { nome: 'Aula 02 - Competência 6 (habilidades 18, 19 e 20) - Parte 2', importancia: 5 },
+                    { nome: 'Aula 03 - Competência 6 (habilidades 19 e 20) - Parte 3', importancia: 5 },
+                    { nome: 'Aula 04 - Competência 7 (habilidades 21)', importancia: 5 },
+                    { nome: 'Aula 05 - Competência 7 (habilidade 22) - recursos linguísticos expressivos', importancia: 5 },
+                    { nome: 'Aula 06 - Competência 7 (habilidade 23 e 24) - recursos linguísticos expressivos', importancia: 5 },
+                    { nome: 'Aula 07 - Competência 8 (habilidade 25, 26 e 27)', importancia: 5 },
+                    { nome: 'Aula 08 - Competência 9 (habilidade 28, 29 e 30)', importancia: 5 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 06 - RESOLUÇÃO DE QUESTÕES',
+                  aulas: [
+                    { nome: 'Aula 01 - Resolução de Questões - Parte 1 (questões básicas)', importancia: 5 },
+                    { nome: 'Aula 02 - Resolução de Questões - Parte 2 (questões operacionais)', importancia: 5 },
+                    { nome: 'Aula 03 - Resolução de Questões - Parte 3 (questões globais)', importancia: 5 }
+                  ]
+                }
+              ]
+            },
+            // INGLÊS (MOVIDO PARA CÁ)
+            {
+              nome: 'Inglês',
+              modulos: [
+                {
+                  nome: 'MÓDULO 01 - TEXT COMPREHENSION / VOCABULARY',
+                  aulas: [
+                    { nome: 'Aula 01 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 02 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 03 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 04 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 05 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 06 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 07 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 08 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 09 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 10 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 11 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 12 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 13 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 14 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 15 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 16 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 17 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 18 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 19 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 20 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 21 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 22 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 23 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 24 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 25 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 26 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 27 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 28 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 29 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 30 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 31 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 32 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 33 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 34 - Text Comprehension (Enem e vestibulares)' },
+                    { nome: 'Aula 35 - Text Comprehension (Enem e vestibulares)' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - GRAMMAR',
+                  aulas: [
+                    { nome: 'Aula 01 - Pronouns and Possessive Adjectives' },
+                    { nome: 'Aula 02 - Present Simple' },
+                    { nome: 'Aula 03 - Past Simple' },
+                    { nome: 'Aula 04 - Present and Past Continuous' },
+                    { nome: 'Aula 05 - Perfect Tenses' },
+                    { nome: 'Aula 06 - Modal Verbs' },
+                    { nome: 'Aula 07 - Future' },
+                    { nome: 'Aula 08 - Used to x Be, Get used to' },
+                    { nome: 'Aula 09 - There be x Have' },
+                    { nome: 'Aula 10 - Gerund and Infinitive' },
+                    { nome: 'Aula 11 - Question Tags' },
+                    { nome: 'Aula 12 - Conditionals' },
+                    { nome: 'Aula 13 - Reported Speech' },
+                    { nome: 'Aula 14 - Passive Voice' },
+                    { nome: 'Aula 15 - Plural of nouns' },
+                    { nome: 'Aula 16 - Articles' },
+                    { nome: 'Aula 17 - Quantifiers' },
+                    { nome: 'Aula 18 - Degree of Adjectives - Será disponibilizada em 15/09' },
+                    { nome: 'Aula 19 - Prepositions' },
+                    { nome: 'Aula 20 - Too, Also, As well, Either...' },
+                    { nome: 'Aula 21 - Genitive Case' },
+                    { nome: 'Aula 22 - Connectors and Conjunctions' },
+                    { nome: 'Aula 23 - Prefixes and Suffixes' }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          nome: 'Matemática e suas Tecnologias',
+          disciplinas: [
+            {
+              nome: 'Matemática',
+              modulos: [
+                {
+                  nome: 'MÓDULO DE MATEMÁTICA BÁSICA',
+                  aulas: [
+                    { nome: 'Aula 01 - Potências, Notação científica e Ordem de grandeza', importancia: 5 },
+                    { nome: 'Aula 02 - Radiciação' },
+                    { nome: 'Aula 03 - Racionalização de denominadores' },
+                    { nome: 'Aula 04 - Produtos notáveis' }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 01 - ÁLGEBRA',
+                  aulas: [
+                    { nome: 'Aula 01 - Conjuntos numéricos', importancia: 5 },
+                    { nome: 'Aula 02 - Sistemas de unidades', importancia: 5 },
+                    { nome: 'Aula 03 - Problemas do 1º grau', importancia: 5 },
+                    { nome: 'Aula 04 - Números Inteiros e suas Propriedades', importancia: 3 },
+                    { nome: 'Aula 05 - Múltiplos, Divisores e Números Primos', importancia: 3 },
+                    { nome: 'Aula 06 - MMC e MDC', importancia: 3 },
+                    { nome: 'Aula 07 - Grandezas Proporcionais - Parte 1', importancia: 5 },
+                    { nome: 'Aula 08 - Grandezas Proporcionais - Parte 2', importancia: 5 },
+                    { nome: 'Aula 09 - Regra de 3', importancia: 5 },
+                    { nome: 'Aula 10 - Porcentagem (Conceitos e Aplicações)', importancia: 5 },
+                    { nome: 'Aula 11 - Juros Simples e Compostos', importancia: 5 },
+                    { nome: 'Aula 12 - Revisão', importancia: 5 },
+                    { nome: 'Aula 13 - Funções - Conceitos Básicos e Função Afim', importancia: 5 },
+                    { nome: 'Aula 14 - Função quadrática - Parte 1', importancia: 5 },
+                    { nome: 'Aula 15 - Função quadrática - Parte 2', importancia: 5 },
+                    { nome: 'Aula 16 - Revisão (Função Afim e Função Quadrática)', importancia: 5 },
+                    { nome: 'Aula 17 - Função Exponencial', importancia: 4 },
+                    { nome: 'Aula 18 - Logaritmos: conceitos e propriedades', importancia: 3 },
+                    { nome: 'Aula 19 - Função logarítmica e aplicações', importancia: 3 },
+                    { nome: 'Aula 20 - Conceitos básicos de medidas de tendência central', importancia: 5 },
+                    { nome: 'Aula 21 - Medidas de dispersão', importancia: 5 },
+                    { nome: 'Aula 22 - Análise Combinatória: Contagem, Fatorial e Permutações simples', importancia: 4 },
+                    { nome: 'Aula 23 - Análise Combinatória: Agrupamentos', importancia: 4 },
+                    { nome: 'Aula 24 - Revisão (Análise Combinatória)', importancia: 4 },
+                    { nome: 'Aula 25 - Probabilidades: Conceitos e aplicações básicas', importancia: 4 },
+                    { nome: 'Aula 26 - Probabilidades: Evento Complementar e Distribuição Binomial', importancia: 4 },
+                    { nome: 'Aula 27 - Probabilidades: Eventos independentes, Diagrama da árvore e Probabilidade condicional', importancia: 4 },
+                    { nome: 'Aula 28 - Revisão de Probabilidade', importancia: 4 },
+                    { nome: 'Aula 29 - Sequências e Progressões Aritméticas', importancia: 2 },
+                    { nome: 'Aula 30 - Progressões Geométricas', importancia: 2 }
+                  ]
+                },
+                {
+                  nome: 'MÓDULO 02 - GEOMETRIA E TRIGONOMETRIA',
+                  aulas: [
+                    { nome: 'Aula 01 - Triângulos - Conceitos e Propriedades', importancia: 5 },
+                    { nome: 'Aula 02 - Triângulos Especiais', importancia: 5 },
+                    { nome: 'Aula 03 - Teorema de Pitágoras e Triângulo Equilátero', importancia: 5 },
+                    { nome: 'Aula 04 - Semelhança do Triângulo e Área do Triângulo', importancia: 4 },
+                    { nome: 'Aula 05 - Lei dos Senos e Lei dos Cossenos', importancia: 1 },
+                    { nome: 'Aula 06 - Polígonos', importancia: 5 },
+                    { nome: 'Aula 07 - Áreas das figuras planas', importancia: 5 },
+                    { nome: 'Aula 08 - Revisão', importancia: 5 },
+                    { nome: 'Aula 09 - Geometria Espacial: Retas e Planos no Espaço e Projeções Ortogonais', importancia: 5 },
+                    { nome: 'Aula 10 - Geometria Espacial: Poliedros e Relação de Euler', importancia: 5 },
+                    { nome: 'Aula 11 - Geometria Espacial: Prismas, Cilindros e Esferas', importancia: 5 },
+                    { nome: 'Aula 12 - Geometria Espacial: Pirâmides, Cones e Proporcionalidades entre Sólidos', importancia: 5 },
+                    { nome: 'Aula 13 - Revisão (Geometria de Posição)', importancia: 5 },
+                    { nome: 'Aula 14 - Revisão (Volumes)', importancia: 5 },
+                    { nome: 'Aula 15 - Geometria Analítica: Estudo do Ponto e da Reta', importancia: 1 },
+                    { nome: 'Aula 16 - Geometria Analítica: Estudo da Circunferência', importancia: 1 },
+                    { nome: 'Aula 17 - Trigonometria: Razões Trigonométricas Elementares', importancia: 2 },
+                    { nome: 'Aula 18 - Trigonometria: Ciclo Trigonométrico', importancia: 2 },
+                    { nome: 'Aula 19 - Trigonometria: Função Seno e Cosseno', importancia: 2 }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+      ];
+
+      // --- UTILITÁRIOS DE PROGRESSO E LOCALSTORAGE ---
+      function getEditalProgress() {
+        const saved = localStorage.getItem('editalChecklist');
+        return saved ? JSON.parse(saved) : {};
+      }
+      function setEditalProgress(data) {
+        localStorage.setItem('editalChecklist', JSON.stringify(data));
+      }
+
+      // --- RENDERIZAÇÃO DO EDITAL ---
+      function renderEdital() {
+        const checklist = getEditalProgress();
+        let totalAulas = 0, totalFeitas = 0;
+        const container = document.getElementById('editalAreas');
+
+        // 1. Armazenar o estado dos acordeões abertos
+        const openAccordions = new Set();
+        document.querySelectorAll('.accordion-content.open').forEach(content => {
+            const header = content.previousElementSibling; // O header está antes do content
+            if (header && header.dataset.accordionId) {
+                openAccordions.add(header.dataset.accordionId);
+            }
+        });
+
+        container.innerHTML = '';
+        editalData.forEach((area, iArea) => {
+          let areaAulas = 0, areaFeitas = 0;
+          const areaDiv = document.createElement('div');
+          areaDiv.className = 'edital-area';
+          // Header da área
+          const areaHeader = document.createElement('div');
+          areaHeader.className = 'edital-area-header';
+          areaHeader.innerHTML = `<span>${area.nome}</span><span id="areaProgresso${iArea}" style="font-size:0.95em; color:#bdbdbd;">0%</span>`;
+          areaDiv.appendChild(areaHeader);
+          // Disciplinas como accordions
+          if (Array.isArray(area.disciplinas)) {
+            area.disciplinas.forEach((disc, iDisc) => {
+              let discAulas = 0, discFeitas = 0;
+              // Criar um ID único para este acordeão
+              const accordionId = `accordion-${iArea}-${iDisc}`;
+
+              // Accordion header
+              const accordionHeader = document.createElement('div');
+              accordionHeader.className = 'accordion-header';
+              accordionHeader.dataset.accordionId = accordionId; // Armazenar o ID no dataset
+              accordionHeader.innerHTML = `<span>${disc.nome}</span><i class="fas fa-chevron-right" style="transition:transform 0.2s;"></i>`;
+              
+              // Accordion content
+              const accordionContent = document.createElement('div');
+              accordionContent.className = 'accordion-content';
+
+              // Módulos
+              if (Array.isArray(disc.modulos)) {
+                disc.modulos.forEach((mod, iMod) => {
+                  let modAulas = 0, modFeitas = 0;
+                  const modDiv = document.createElement('div');
+                  modDiv.style.margin = '18px 0 18px 0';
+                  modDiv.style.paddingLeft = '16px';
+                  modDiv.style.paddingTop = '10px';
+                  modDiv.style.paddingBottom = '10px';
+                  modDiv.style.display = 'flex'; /* Tornar o contêiner flexível */
+                  modDiv.style.alignItems = 'center'; /* Alinhar itens verticalmente */
+
+                  const moduleNameSpan = document.createElement('span');
+                  moduleNameSpan.style.fontWeight = '600';
+                  moduleNameSpan.style.marginRight = '15px'; /* Adicionar espaçamento à direita do nome do módulo */
+                  moduleNameSpan.textContent = mod.nome;
+                  modDiv.appendChild(moduleNameSpan);
+                  
+                  // Lista de aulas
+                  const ul = document.createElement('ul');
+                  ul.style.listStyle = 'none';
+                  ul.style.paddingLeft = '18px';
+                  ul.style.marginTop = '10px'; /* Aumenta a distância do título do módulo para o primeiro conteúdo */
+                  mod.aulas.forEach((aula, iAula) => {
+                    modAulas++;
+                    totalAulas++;
+                    areaAulas++;
+                    discAulas++;
+                    const aulaId = `${iArea}-${iDisc}-${iMod}-${iAula}`;
+                    const checked = checklist[aulaId] ? 'checked' : '';
+                    if (checked) { modFeitas++; } // Incrementa modFeitas se a aula estiver marcada
+                    const li = document.createElement('li');
+                    li.style.display = 'flex';
+                    li.style.alignItems = 'center'; /* Centraliza verticalmente os itens da linha */
+                    li.style.gap = '8px';
+                    li.style.margin = '2px 0';
+                    li.style.padding = '6px 0';
+
+                    const inputCheckbox = document.createElement('input');
+                    inputCheckbox.type = 'checkbox';
+                    inputCheckbox.id = `aula${aulaId}`;
+                    inputCheckbox.style.accentColor = 'var(--accent-color)';
+                    inputCheckbox.style.width = '18px';
+                    inputCheckbox.style.height = '18px';
+                    inputCheckbox.style.marginRight = '16px';
+                    if (checked) {
+                        inputCheckbox.checked = true;
+                    }
+
+                    const labelElement = document.createElement('label');
+                    labelElement.htmlFor = `aula${aulaId}`;
+                    labelElement.style.flex = '1';
+                    labelElement.style.cursor = 'pointer';
+                    labelElement.textContent = aula.nome;
+
+                    const starSpan = document.createElement('span');
+                    starSpan.style.color = '#ffd600';
+                    starSpan.style.fontSize = '1.1em';
+                    starSpan.style.paddingRight = '18px';
+                    starSpan.textContent = '★'.repeat(aula.importancia || 1);
+
+                    li.appendChild(inputCheckbox);
+                    li.appendChild(labelElement);
+                    li.appendChild(starSpan);
+
+                    inputCheckbox.addEventListener('change', function() {
+                      const atual = getEditalProgress();
+                      if (this.checked) atual[aulaId] = true; else delete atual[aulaId];
+                      setEditalProgress(atual);
+                      renderEdital(); // Re-renderiza para atualizar o progresso
+                    });
+                    // Impedir que o clique no input e na label feche o acordeão
+                    inputCheckbox.addEventListener('click', function(e) {
+                        e.stopPropagation(); 
+                    });
+                    labelElement.addEventListener('click', function(e) {
+                        e.stopPropagation(); 
+                    });
+                    ul.appendChild(li);
+                  });
+                  // Barra de progresso do módulo
+                  let modPct = modAulas > 0 ? Math.round((modFeitas / modAulas) * 100) : 0;
+                  // CORREÇÃO: Força 100% se todas as aulas estiverem feitas
+                  if (modFeitas === modAulas && modAulas > 0) {
+                      modPct = 100;
+                  }
+
+                  // DEBUG: Log para o módulo de Matemática Básica
+                  if (mod.nome === 'MÓDULO DE MATEMÁTICA BÁSICA') {
+                      console.log(`DEBUG: MÓDULO DE MATEMÁTICA BÁSICA`);
+                      console.log(`  modAulas: ${modAulas}`);
+                      console.log(`  modFeitas: ${modFeitas}`);
+                      console.log(`  Calculated modPct (before override): ${modAulas > 0 ? Math.round((modFeitas / modAulas) * 100) : 0}`);
+                      console.log(`  Final modPct (after override): ${modPct}`);
+                      console.log(`  Current checklist for this module:`);
+                      mod.aulas.forEach((aula, idx) => {
+                          const dbgAulaId = `${iArea}-${iDisc}-${iMod}-${idx}`;
+                          console.log(`    ${aula.nome} (ID: ${dbgAulaId}): ${checklist[dbgAulaId] ? 'CHECKED' : 'UNCHECKED'}`);
+                      });
+                  }
+
+                  const modBar = document.createElement('div');
+                  modBar.className = 'edital-bar';
+                  // modBar.style.margin = '4px 0 8px 0'; /* Removido para controle pelo flexbox do modDiv */
+
+                  const modBarInner = document.createElement('div');
+                  modBarInner.className = 'edital-bar-inner';
+                  modBarInner.style.width = `${modPct}%`; // Definindo a largura diretamente no elemento
+                  // DEBUG: Log do valor aplicado
+                  console.log(`Module: ${mod.nome}, modBarInner.style.width set to: ${modBarInner.style.width}`);
+
+                  modBar.appendChild(modBarInner); // Adiciona a barra interna à barra externa
+                  modDiv.appendChild(modBar); // Adiciona a barra externa ao div do módulo
+
+                  const modLabel = document.createElement('span');
+                  modLabel.style.fontSize = '0.93em';
+                  modLabel.style.color = '#bdbdbd';
+                  modLabel.innerText = `${modPct}%`;
+                  modDiv.appendChild(modLabel); // Adiciona o rótulo depois da barra
+                  
+                  accordionContent.appendChild(modDiv); // Adiciona o modDiv ao accordionContent
+                  accordionContent.appendChild(ul); // Adiciona a lista de aulas separadamente
+                });
+              }
+              // Barra de progresso da disciplina
+              const discPct = discAulas ? Math.round((discFeitas/discAulas)*100) : 0;
+              const discBar = document.createElement('div');
+              discBar.className = 'edital-bar';
+              discBar.style.margin = '4px 0 8px 0';
+
+              const discBarInner = document.createElement('div'); // Criar elemento interno
+              discBarInner.className = 'edital-bar-inner';
+              discBarInner.style.width = `${discPct}%`; // Definir largura
+
+              discBar.appendChild(discBarInner); // Adicionar barra interna à externa
+              accordionContent.appendChild(discBar); // Adicionar barra externa ao conteúdo do acordeão
+
+              const discLabel = document.createElement('span');
+              discLabel.style.fontSize = '0.93em';
+              discLabel.style.color = '#bdbdbd';
+              discLabel.innerText = `${discPct}%`;
+              accordionContent.appendChild(discLabel);
+              
+              // Accordion toggle (apenas no cabeçalho)
+              accordionHeader.addEventListener('click', function(e) {
+                const isOpen = accordionContent.classList.toggle('open');
+                const icon = accordionHeader.querySelector('i');
+                icon.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+              });
+
+              // 2. Restaurar o estado do acordeão
+              if (openAccordions.has(accordionId)) {
+                  accordionContent.classList.add('open');
+                  accordionHeader.querySelector('i').style.transform = 'rotate(90deg)';
+              } else {
+                  accordionContent.classList.remove('open');
+                  accordionHeader.querySelector('i').style.transform = 'rotate(0deg)';
+              }
+
+              areaDiv.appendChild(accordionHeader);
+              areaDiv.appendChild(accordionContent);
+            });
+          }
+          // Barra de progresso da área (apenas atualiza o texto do percentual)
+          const areaPct = areaAulas ? Math.round((areaFeitas/areaAulas)*100) : 0;
+          areaDiv.querySelector(`#areaProgresso${iArea}`).innerText = `${areaPct}%`;
+          container.appendChild(areaDiv);
+        });
+        // Progresso geral
+        let geralPct = totalAulas > 0 ? Math.round((totalFeitas/totalAulas)*100) : 0;
+        // CORREÇÃO: Força 100% se todas as aulas estiverem feitas
+        if (totalFeitas === totalAulas && totalAulas > 0) {
+            geralPct = 100;
+        }
+        
+        document.getElementById('editalProgressoGeral').innerText = geralPct + '%';
+        document.getElementById('editalBarGeral').style.width = `${geralPct}%`;
+      }
+
+      // --- INICIALIZAÇÃO ---
+      renderEdital();
+
+      // Generate a unique ID
+      const generateId = () => {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+      };
+
+      // Save study to localStorage
+      const salvarEstudo = (estudo) => {
+        const dados = JSON.parse(localStorage.getItem("estudos") || "[]");
+        estudo.id = generateId();
+        // Corrigir: usar a data escolhida pelo usuário, se fornecida
+        if (estudo.data) {
+          // Se vier no formato yyyy-mm-dd, converter para ISO string no início do dia
+          if (/^\d{4}-\d{2}-\d{2}$/.test(estudo.data)) {
+            estudo.data = new Date(estudo.data + 'T00:00:00').toISOString();
+          } else {
+            // Se já for ISO, mantém
+            estudo.data = new Date(estudo.data).toISOString();
+          }
+        } else {
+          estudo.data = new Date().toISOString();
+        }
+        estudo.completedReviews = [];
+        dados.push(estudo);
+        localStorage.setItem("estudos", JSON.stringify(dados));
+        return estudo.id;
+      };
+
+      // Remove study from localStorage
+      const removerEstudo = (id) => {
+        const dados = JSON.parse(localStorage.getItem("estudos") || "[]");
+        const atualizados = dados.filter(e => e.id !== id);
+        localStorage.setItem("estudos", JSON.stringify(atualizados));
+        atualizarInterface();
+      };
+
+      // Calculate days between dates
+      const calcularDias = (dataISO) => {
+        const hoje = new Date();
+        const dataEstudo = new Date(dataISO);
+        // Reset time part to compare only dates
+        hoje.setHours(0, 0, 0, 0);
+        dataEstudo.setHours(0, 0, 0, 0);
+        const diff = Math.floor((hoje - dataEstudo) / (1000 * 60 * 60 * 24));
+        return diff;
+      };
+
+      // Get next review date for a study
+      const getNextReviewDate = (estudo) => {
+        const reviewSchedule = [3, 7, 15, 30, 60, 90, 120];
+        const daysPassed = calcularDias(estudo.data);
+        
+        for (const day of reviewSchedule) {
+          if (day > daysPassed && !estudo.completedReviews.includes(day)) {
+            return day;
+          }
+        }
+        
+        return null;
+      };
+
+      // Update all interface elements
+      const atualizarInterface = () => {
+        const dados = JSON.parse(localStorage.getItem("estudos") || "[]");
+        
+        // Update stats
+        totalStudiesEl.textContent = dados.length;
+        
+        // Filter today's reviews
+        const reviewSchedule = [3, 7, 15, 30, 60, 90, 120];
+        const revisoesHoje = dados.filter(e => {
+          const dias = calcularDias(e.data);
+          return reviewSchedule.includes(dias) && !e.completedReviews.includes(dias);
+        });
+        
+        todayReviewsEl.textContent = revisoesHoje.length;
+        
+        // Filter upcoming reviews
+        const upcomingReviews = dados.filter(e => {
+          const nextReview = getNextReviewDate(e);
+          return nextReview !== null;
+        });
+        
+        upcomingReviewsEl.textContent = upcomingReviews.length;
+        
+        // Revisões Atrasadas
+        let overdueCount = 0;
+        dados.forEach(estudo => {
+          const dataEstudo = new Date(estudo.data);
+          reviewSchedule.forEach(day => {
+            const reviewDate = new Date(dataEstudo.getTime() + day * 24 * 60 * 60 * 1000);
+            const hoje = new Date();
+            hoje.setHours(0,0,0,0);
+            reviewDate.setHours(0,0,0,0);
+            if (hoje > reviewDate && !estudo.completedReviews.includes(day)) {
+              overdueCount++;
+            }
+          });
+        });
+        overdueReviewsEl.textContent = overdueCount;
+        
+        // Update progress
+        const totalRevisoes = reviewSchedule.length;
+        const totalPossibleReviews = dados.length * totalRevisoes;
+        const completedReviews = dados.reduce((acc, estudo) => acc + estudo.completedReviews.length, 0);
+        const progressPercentage = totalPossibleReviews > 0 
+          ? Math.round((completedReviews / totalPossibleReviews) * 100) 
+          : 0;
+        
+        progressBar.style.width = `${progressPercentage}%`;
+        progressText.textContent = totalPossibleReviews > 0
+          ? `Seu progresso: ${completedReviews}/${totalPossibleReviews} revisões completadas (${progressPercentage}%)`
+          : "Você ainda não iniciou seus estudos.";
+        
+        // Display today's reviews
+        revisoesUl.innerHTML = "";
+        
+        if (revisoesHoje.length === 0) {
+          revisoesUl.innerHTML = `
+            <li class="empty-state">
+              <i class="fas fa-check-circle"></i>
+              <p>Nenhuma revisão agendada para hoje</p>
+            </li>
+          `;
+        } else {
+          revisoesHoje.forEach(estudo => {
+            const dias = calcularDias(estudo.data);
+            const quantidade = dias === 3 ? 5 : dias === 7 ? 3 : dias === 15 ? 2 : 1;
+            const revisoesFeitas = estudo.completedReviews.length;
+            const totalRevisoes = reviewSchedule.length;
+            const progresso = Math.round((revisoesFeitas / totalRevisoes) * 100);
+            // Corrigir cálculo da próxima revisão
+            let proximaRevisaoTexto = '';
+            const reviewScheduleOrdenado = [...reviewSchedule].sort((a,b)=>a-b);
+            let proxima = null;
+            for (const day of reviewScheduleOrdenado) {
+              if (day > dias && !estudo.completedReviews.includes(day)) {
+                proxima = day;
+                break;
+              }
+            }
+            if (proxima !== null) {
+              const proximaData = new Date(new Date(estudo.data).getTime() + proxima * 24 * 60 * 60 * 1000);
+              proximaRevisaoTexto = proximaData.toLocaleDateString();
+            } else {
+              proximaRevisaoTexto = 'Todas as revisões concluídas';
+            }
+            const badgeColor = estudo.disciplina === 'Química' ? '#b388ff' : estudo.disciplina === 'Geografia' ? '#7c4dff' : '#2196f3';
+            const li = document.createElement("li");
+            li.className = "card-review";
+            li.innerHTML = `
+              <div class="card-review-header">
+                <span class="badge-disciplina" style="background:${badgeColor};">${estudo.disciplina}</span>
+                <div class="card-review-actions">
+                  <button onclick="marcarRevisaoConcluida('${estudo.id}', ${dias})"><i class="fas fa-check"></i></button>
+                  <button onclick="removerEstudo('${estudo.id}')"><i class="fas fa-trash-alt"></i></button>
+                </div>
+              </div>
+              <h4 class="card-review-title">${estudo.conteudo}</h4>
+              ${estudo.observacao ? `<p class="card-review-obs"><i class="fas fa-sticky-note"></i> ${estudo.observacao}</p>` : ''}
+              <p class="card-review-info"><i class="fas fa-calendar-alt"></i> Estudo inicial: ${new Date(estudo.data).toLocaleDateString()}</p>
+              <div class="card-review-progress">
+                <div class="card-review-progress-bar" style="width:${progresso}%"></div>
+              </div>
+              <p class="card-review-revisao"><i class="fas fa-history"></i> Próxima revisão: ${proximaRevisaoTexto}</p>
+            `;
+            revisoesUl.appendChild(li);
+          });
+        }
+
+        // Display all studies
+        allStudiesUl.innerHTML = "";
+        if (dados.length === 0) {
+          allStudiesUl.innerHTML = `
+            <li class="empty-state">
+              <i class="fas fa-book"></i>
+              <p>Você ainda não adicionou nenhum estudo</p>
+            </li>
+          `;
+        } else {
+          dados.forEach(estudo => {
+            const li = document.createElement("li");
+            li.className = "review-item";
+            li.innerHTML = `
+              <div class="review-meta">
+                <span class="review-discipline">${estudo.disciplina}</span>
+                <div class="actions">
+                  <button onclick="removerEstudo('${estudo.id}')"><i class="fas fa-trash-alt"></i></button>
+                </div>
+              </div>
+              <div class="review-content">${estudo.conteudo}</div>
+              <div class="review-notes"><i class="fas fa-calendar-alt"></i> Data: ${new Date(estudo.data).toLocaleDateString()}</div>
+              ${estudo.observacao ? `<div class="review-notes"><i class="fas fa-sticky-note"></i> Obs: ${estudo.observacao}</div>` : ''}
+            `;
+            allStudiesUl.appendChild(li);
+          });
+        }
+
+        // Display upcoming reviews
+        upcomingList.innerHTML = "";
+        if (upcomingReviews.length === 0) {
+          upcomingList.innerHTML = `
+            <li class="empty-state">
+              <i class="fas fa-calendar-plus"></i>
+              <p>Nenhuma revisão agendada</p>
+            </li>
+          `;
+        } else {
+          upcomingReviews.sort((a, b) => {
+            const nextA = getNextReviewDate(a);
+            const nextB = getNextReviewDate(b);
+            if (nextA === null && nextB === null) return 0;
+            if (nextA === null) return 1;
+            if (nextB === null) return -1;
+            return (new Date(a.data).getTime() + nextA * 24 * 60 * 60 * 1000) - (new Date(b.data).getTime() + nextB * 24 * 60 * 60 * 1000);
+          }).forEach(estudo => {
+            const nextReviewDay = getNextReviewDate(estudo);
+            if (nextReviewDay !== null) {
+              const nextReviewDate = new Date(new Date(estudo.data).getTime() + nextReviewDay * 24 * 60 * 60 * 1000);
+              const li = document.createElement("li");
+              li.innerHTML = `
+                <i class="fas fa-bell" style="color:var(--warning-color); margin-right: 8px;"></i>
+                ${estudo.disciplina}: ${estudo.conteudo} em ${nextReviewDate.toLocaleDateString()} (${nextReviewDay} dias)
+              `;
+              upcomingList.appendChild(li);
+            }
+          });
+        }
+      };
+
+      // Global function to mark review as complete
+      window.marcarRevisaoConcluida = (id, dias) => {
+        const dados = JSON.parse(localStorage.getItem("estudos") || "[]");
+        const estudoIndex = dados.findIndex(e => e.id === id);
+        if (estudoIndex !== -1) {
+          if (!dados[estudoIndex].completedReviews.includes(dias)) {
+            dados[estudoIndex].completedReviews.push(dias);
+            localStorage.setItem("estudos", JSON.stringify(dados));
+            atualizarInterface();
+          }
+        }
+      };
+
+      // Global function to remove study
+      window.removerEstudo = (id) => {
+        const dados = JSON.parse(localStorage.getItem("estudos") || "[]");
+        const atualizados = dados.filter(e => e.id !== id);
+        localStorage.setItem("estudos", JSON.stringify(atualizados));
+        atualizarInterface();
+      };
+
+      // --- INICIALIZAÇÃO ---
+      atualizarInterface();
+
+      if (form) {
+        form.addEventListener("submit", function(e) {
+          e.preventDefault();
+          const disciplina = document.getElementById("disciplina").value;
+          const conteudo = document.getElementById("conteudo").value;
+          const dataEstudo = document.getElementById("dataEstudo").value;
+          const observacao = document.getElementById("observacao").value;
+
+          if (!disciplina || !conteudo || !dataEstudo) {
+            alert("Preencha todos os campos obrigatórios!");
+            return;
+          }
+
+          const estudo = {
+            disciplina,
+            conteudo,
+            data: dataEstudo,
+            observacao
+          };
+
+          salvarEstudo(estudo);
+          form.reset();
+          atualizarInterface();
+        });
+      }
+
+      // --- BACKUP E RESTAURAÇÃO ---
+      const btnExportBackup = document.getElementById('btnExportBackup');
+      const btnImportBackup = document.getElementById('btnImportBackup');
+      const inputImportBackup = document.getElementById('inputImportBackup');
+      const importStatus = document.getElementById('importStatus');
+
+      btnExportBackup.addEventListener('click', () => {
+        const estudos = localStorage.getItem('estudos') || '[]';
+        const editalChecklist = localStorage.getItem('editalChecklist') || '{}';
+        const backup = {
+          estudos: JSON.parse(estudos),
+          editalChecklist: JSON.parse(editalChecklist)
+        };
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'backup-revisao-espaçada.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+
+      btnImportBackup.addEventListener('click', () => {
+        inputImportBackup.value = '';
+        inputImportBackup.click();
+      });
+
+      inputImportBackup.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          try {
+            const data = JSON.parse(evt.target.result);
+            if (data.estudos && data.editalChecklist) {
+              localStorage.setItem('estudos', JSON.stringify(data.estudos));
+              localStorage.setItem('editalChecklist', JSON.stringify(data.editalChecklist));
+              importStatus.textContent = 'Backup importado com sucesso!';
+              atualizarInterface();
+              renderEdital();
+            } else {
+              importStatus.textContent = 'Arquivo de backup inválido.';
+            }
+          } catch (err) {
+            importStatus.textContent = 'Erro ao importar backup.';
+          }
+        };
+        reader.readAsText(file);
+      });
+    });
+  </script>
+</body>
+</html>
