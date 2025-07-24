@@ -1167,10 +1167,9 @@ modalEditarConteudo.onclick = (e) => {
 
 // --- Navegação Sidebar/Header ---
 document.querySelectorAll('.sidebar .nav-icon, .header .nav-links a').forEach(el => {
-  el.onclick = async (e) => {
+  el.onclick = (e) => {
     e.preventDefault();
     showPage(el.dataset.page);
-    await carregarEstudosOnline();
     if(el.dataset.page === 'conteudos') renderConteudos();
     if(el.dataset.page === 'dashboard') renderDashboard();
     if(el.dataset.page === 'cronograma') renderCronograma();
