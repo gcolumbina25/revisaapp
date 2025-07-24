@@ -817,27 +817,6 @@
             display: block;
         }
     </style>
-    <!-- Firebase App (core) -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-    <!-- Firebase Database -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
-    <script>
-      // Configuração do Firebase
-      const firebaseConfig = {
-        apiKey: "AIzaSyDOtTxk99n-pZfPMBCdXn_TSDEWBUMH2Dk",
-        authDomain: "studeai-app.firebaseapp.com",
-        databaseURL: "https://studeai-app-default-rtdb.firebaseio.com",
-        projectId: "studeai-app",
-        storageBucket: "studeai-app.firebasestorage.app",
-        messagingSenderId: "450142969807",
-        appId: "1:450142969807:web:1cba8d584ad160934c3cba",
-        measurementId: "G-4JT0YYV5BH"
-      };
-      // Inicializa o Firebase
-      firebase.initializeApp(firebaseConfig);
-      // Inicializa o Database
-      const database = firebase.database();
-    </script>
 </head>
 <body>
     <!-- Tela de Login -->
@@ -1113,10 +1092,6 @@ function getEstudos() {
 }
 function setEstudos(arr) {
   localStorage.setItem('estudos', JSON.stringify(arr));
-  // Salva no Firebase Database
-  if (typeof database !== 'undefined') {
-    database.ref('estudos').set(arr);
-  }
 }
 function getEditalProgress() {
   const saved = localStorage.getItem('editalChecklist');
@@ -1124,9 +1099,6 @@ function getEditalProgress() {
 }
 function setEditalProgress(data) {
   localStorage.setItem('editalChecklist', JSON.stringify(data));
-  if (typeof database !== 'undefined') {
-    database.ref('editalProgress').set(data);
-  }
 }
 
 // --- Navegação ---
@@ -3173,14 +3145,16 @@ window.marcarRevisaoConcluida = function(id, dias) {
     if(!dados[estudoIndex].completedReviews.includes(diasNum)) {
       dados[estudoIndex].completedReviews.push(diasNum);
       setEstudos(dados);
-      // Não chama renderDashboard/renderConteudos aqui, pois o listener do Firebase já faz isso
+      renderDashboard();
+      renderConteudos();
     }
   }
 };
 window.removerEstudo = function(id) {
   const dados = getEstudos().filter(e => e.id !== id);
   setEstudos(dados);
-  // Não chama renderDashboard/renderConteudos aqui, pois o listener do Firebase já faz isso
+  renderDashboard();
+  renderConteudos();
 };
 
 // --- Função para editar estudo ---
@@ -3274,41 +3248,6 @@ function initializeApp() {
     showPage('dashboard');
     renderDashboard();
 }
-
-// Substitua a função carregarEstudosOnline e o eventListener por:
-function sincronizarEstudosOnline() {
-  if (typeof database !== 'undefined') {
-    database.ref('estudos').on('value', (snapshot) => {
-      const data = snapshot.val() || [];
-      localStorage.setItem('estudos', JSON.stringify(data));
-      // Atualize a interface sempre que os dados mudarem
-      if (typeof renderDashboard === 'function') renderDashboard();
-      if (typeof renderConteudos === 'function') renderConteudos();
-      if (typeof renderCronograma === 'function') renderCronograma();
-      // ...adicione outras funções de renderização se necessário
-    });
-  }
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  sincronizarEstudosOnline();
-  // Renderize a tela inicial (opcional, pois o listener já chama renderDashboard)
-});
-
-// Listener para manter progresso do edital sincronizado em tempo real
-function sincronizarEditalProgressOnline() {
-  if (typeof database !== 'undefined') {
-    database.ref('editalProgress').on('value', (snapshot) => {
-      const data = snapshot.val() || {};
-      localStorage.setItem('editalChecklist', JSON.stringify(data));
-      if (typeof renderEdital === 'function') renderEdital();
-    });
-  }
-}
-// Chamar o listener ao iniciar o app
-window.addEventListener('DOMContentLoaded', () => {
-  sincronizarEditalProgressOnline();
-});
 
     </script>
 </body>
