@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDOtTxk99n-pZfPMBCdXn_TSDEWBUMH2Dk",
+    authDomain: "studeai-app.firebaseapp.com",
+    projectId: "studeai-app",
+    storageBucket: "studeai-app.firebasestorage.app",
+    messagingSenderId: "450142969807",
+    appId: "1:450142969807:web:1cba8d584ad160934c3cba",
+    measurementId: "G-4JT0YYV5BH"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudeAí App</title>
@@ -39,29 +62,7 @@
             --progress-dot-filled: var(--primary-green); /* Cor do ponto preenchido */
             --progress-dot-empty: rgba(255, 255, 255, 0.3); /* Cor do ponto vazio */
         }
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDOtTxk99n-pZfPMBCdXn_TSDEWBUMH2Dk",
-    authDomain: "studeai-app.firebaseapp.com",
-    projectId: "studeai-app",
-    storageBucket: "studeai-app.firebasestorage.app",
-    messagingSenderId: "450142969807",
-    appId: "1:450142969807:web:1cba8d584ad160934c3cba",
-    measurementId: "G-4JT0YYV5BH"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--bg-dark), #00101C); /* Gradiente para o fundo */
