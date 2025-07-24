@@ -1124,6 +1124,9 @@ function getEditalProgress() {
 }
 function setEditalProgress(data) {
   localStorage.setItem('editalChecklist', JSON.stringify(data));
+  if (typeof database !== 'undefined') {
+    database.ref('editalProgress').set(data);
+  }
 }
 
 // --- Navegação ---
@@ -3170,16 +3173,14 @@ window.marcarRevisaoConcluida = function(id, dias) {
     if(!dados[estudoIndex].completedReviews.includes(diasNum)) {
       dados[estudoIndex].completedReviews.push(diasNum);
       setEstudos(dados);
-      renderDashboard();
-      renderConteudos();
+      // Não chama renderDashboard/renderConteudos aqui, pois o listener do Firebase já faz isso
     }
   }
 };
 window.removerEstudo = function(id) {
   const dados = getEstudos().filter(e => e.id !== id);
   setEstudos(dados);
-  renderDashboard();
-  renderConteudos();
+  // Não chama renderDashboard/renderConteudos aqui, pois o listener do Firebase já faz isso
 };
 
 // --- Função para editar estudo ---
@@ -3274,33 +3275,39 @@ function initializeApp() {
     renderDashboard();
 }
 
-// Busca os estudos do Firebase Database e salva no localStorage
-async function carregarEstudosOnline() {
-  return new Promise((resolve, reject) => {
-    if (typeof database !== 'undefined') {
-      database.ref('estudos').once('value', (snapshot) => {
-        const data = snapshot.val() || [];
-        localStorage.setItem('estudos', JSON.stringify(data));
-        resolve(data);
-      }, (error) => {
-        resolve([]); // Em caso de erro, retorna array vazio
-      });
-    } else {
-      resolve([]);
-    }
-  });
+// Substitua a função carregarEstudosOnline e o eventListener por:
+function sincronizarEstudosOnline() {
+  if (typeof database !== 'undefined') {
+    database.ref('estudos').on('value', (snapshot) => {
+      const data = snapshot.val() || [];
+      localStorage.setItem('estudos', JSON.stringify(data));
+      // Atualize a interface sempre que os dados mudarem
+      if (typeof renderDashboard === 'function') renderDashboard();
+      if (typeof renderConteudos === 'function') renderConteudos();
+      if (typeof renderCronograma === 'function') renderCronograma();
+      // ...adicione outras funções de renderização se necessário
+    });
+  }
 }
 
-// Função original, permanece para compatibilidade
-function getEstudos() {
-  return JSON.parse(localStorage.getItem('estudos') || '[]');
-}
+window.addEventListener('DOMContentLoaded', () => {
+  sincronizarEstudosOnline();
+  // Renderize a tela inicial (opcional, pois o listener já chama renderDashboard)
+});
 
-// Ao carregar a página, busca os dados online antes de renderizar
-window.addEventListener('DOMContentLoaded', async () => {
-  await carregarEstudosOnline();
-  // Renderiza a tela inicial (ajuste conforme sua lógica de navegação)
-  renderDashboard();
+// Listener para manter progresso do edital sincronizado em tempo real
+function sincronizarEditalProgressOnline() {
+  if (typeof database !== 'undefined') {
+    database.ref('editalProgress').on('value', (snapshot) => {
+      const data = snapshot.val() || {};
+      localStorage.setItem('editalChecklist', JSON.stringify(data));
+      if (typeof renderEdital === 'function') renderEdital();
+    });
+  }
+}
+// Chamar o listener ao iniciar o app
+window.addEventListener('DOMContentLoaded', () => {
+  sincronizarEditalProgressOnline();
 });
 
     </script>
